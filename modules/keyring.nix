@@ -13,7 +13,7 @@
 
     persist.home.directories = [
       ".local/share/keyrings"
-      ".gnupg"
+      { directory = ".gnupg"; mode = "0700"; }
     ];
   };
 }
