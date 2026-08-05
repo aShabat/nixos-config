@@ -25,5 +25,7 @@
 
       home.packages = [ pkgs.git-crypt ];
     };
+
+    persist.home.files = [ ".local/state/lazygit/state.yml" ];
   };
 }
