@@ -1,22 +1,28 @@
 {
   den.aspects.git = {
-    homeManager.programs.git = {
-      enable = true;
-      settings = {
-        user = {
-	  name = "Anton Shabat";
-	  email = "anton.shabat@gmail.com";
+    homeManager = {pkgs, ...} : {
+      programs = {
+        git = {
+          enable = true;
+          settings = {
+            user = {
+              name = "Anton Shabat";
+	      email = "anton.shabat@gmail.com";
+	    };
+	    core = {
+	      editor = "nvim";
+	    };
+	    init = {
+	      defaultBranch = "main";
+	    };
+	  };
 	};
-	core = {
-	  editor = "nvim";
-	};
-	init = {
-	  defaultBranch = "main";
-	};
+        lazygit = {
+          enable = true;
+        };
       };
-    };
-    homeManager.programs.lazygit = {
-      enable = true;
+
+      home.packages = [ pkgs.git-crypt ];
     };
   };
 }
