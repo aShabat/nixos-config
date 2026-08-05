@@ -9,6 +9,11 @@
       home.packages = [ pkgs.gcr ];
 
       programs.gpg.enable = true;
+
+      services.gpg-agent = {
+        enable = true;
+	pinentry.package = pkgs.pinentry-curses;
+      };
     };
 
     persist.home.directories = [
