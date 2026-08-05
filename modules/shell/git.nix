@@ -18,6 +18,11 @@
 	  };
 	};
 
+	gh = {
+	  enable = true;
+	  gitCredentialHelper.enable = true;
+	};
+
         lazygit = {
           enable = true;
         };
@@ -26,6 +31,9 @@
       home.packages = [ pkgs.git-crypt ];
     };
 
-    persist.home.files = [ ".local/state/lazygit/state.yml" ];
+    persist.home.files = [
+      ".local/state/lazygit/state.yml" 
+      ".config/gh/hosts.yml"
+    ];
   };
 }
