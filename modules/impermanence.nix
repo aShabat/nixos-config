@@ -1,10 +1,11 @@
 {den, inputs, lib, ...} : let
-root = "/dev/disk/by-label/nixos";
-root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root) )) + ".device";
-directories = persist: lib.concatMap (p: p.directories or []) persist;
-files = persist: lib.concatMap (p: p.files or []) persist;
-home-directories = persist: lib.concatMap (p: p.home.directories or []) persist;
-home-files = persist: lib.concatMap (p: p.home.files or []) persist;
+  inherit (den.lib) policy;
+  root = "/dev/disk/by-label/nixos";
+  root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root) )) + ".device";
+  directories = persist: lib.concatMap (p: p.directories or []) persist;
+  files = persist: lib.concatMap (p: p.files or []) persist;
+  home-directories = persist: lib.concatMap (p: p.home.directories or []) persist;
+  home-files = persist: lib.concatMap (p: p.home.files or []) persist;
 in {
   flake-file.inputs.impermanence = {
     url = "github:nix-community/impermanence";
@@ -14,7 +15,12 @@ in {
     description = "impermanence files and directories";
   };
 
+  den.policies.host-impermanence-for-users = { host, user, ...} : [
+    (policy.include den.aspects.impermanence)
+  ];
+
   den.aspects.impermanence = {
+    includes = [ den.policies.host-impermanence-for-users ];
     nixos = {persist, ...} : {
       imports = [ (inputs.impermanence.nixosModules.impermanence or {}) ];
 
