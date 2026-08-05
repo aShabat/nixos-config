@@ -1,7 +1,9 @@
 {den, ...} : {
   den.aspects.anton = {
-    includes = [ den.batteries.primary-user 
-      den.aspects.shell
+    includes = with den; [ 
+      batteries.primary-user 
+      aspects.shell
+      aspects.keyring
       ];
 
     user = {
