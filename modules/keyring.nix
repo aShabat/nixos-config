@@ -7,10 +7,13 @@
     homeManager = {pkgs, ...} : {
       services.gnome-keyring.enable = true;
       home.packages = [ pkgs.gcr ];
+
+      programs.gpg.enable = true;
     };
 
-    persist.directories = [
+    persist.home.directories = [
       ".local/share/keyrings"
+      ".gnupg"
     ];
   };
 }
