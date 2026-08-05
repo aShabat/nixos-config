@@ -64,7 +64,6 @@ in {
       home.persistence."/persistent" = {
         enable = true;
 	directories = [
-		"testing_persistence"
 	] ++ (home-directories persist);
 	files = [
 	] ++ (home-files persist);
