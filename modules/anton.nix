@@ -7,9 +7,5 @@
       aspects.keyring
       aspects.ssh
       ];
-
-    user = {
-      password = "nixospass";
-    };
   };
 }
