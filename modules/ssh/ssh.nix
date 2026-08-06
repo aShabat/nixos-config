@@ -22,8 +22,6 @@
       builtins.filter is-pub-key (lib.filesystem.listFilesRecursive ./.);
     };
 
-    homeManager = {host, user, ...} : {
-      home.file.".ssh/id_ed25519".source = ./. + "/${user.userName}@${host.hostName}_ed25519";
-    };
+    persist.home.files = [ ".ssh/id_ed25519" ];
   };
 }
