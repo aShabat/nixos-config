@@ -22,6 +22,7 @@
       builtins.filter is-pub-key (lib.filesystem.listFilesRecursive ./.);
     };
 
+    persist.files = builtins.map (key: "/etc/ssh/ssh_host_" + key) [ "ed25519_key" "ed25519_key.pub" "rsa_key" "rsa_key.pub" ];
     persist.home.files = [ ".ssh/id_ed25519" ".ssh/id_ed25519.pub" ];
   };
 }
