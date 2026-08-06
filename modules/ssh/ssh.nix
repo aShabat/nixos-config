@@ -22,6 +22,6 @@
       builtins.filter is-pub-key (lib.filesystem.listFilesRecursive ./.);
     };
 
-    persist.home.files = [ ".ssh/id_ed25519" ];
+    persist.home.files = [ ".ssh/id_ed25519" ".ssh/id_ed25519.pub" ];
   };
 }
