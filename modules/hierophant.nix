@@ -1,6 +1,6 @@
 {den, ...} : {
   den.aspects.hierophant = {
-    includes = with den.aspects; [ network-manager impermanence ];
+    includes = with den.aspects; [ network-manager impermanence ssh ];
 
     nixos =
       { pkgs, ... }:
