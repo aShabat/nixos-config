@@ -4,6 +4,7 @@
       batteries.primary-user 
       aspects.shell
       aspects.keyring
+      aspects.ssh
       ];
 
     user = {

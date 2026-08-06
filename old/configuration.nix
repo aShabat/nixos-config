@@ -30,18 +30,6 @@
     bluetui
   ];
 
-  # Enable the OpenSSH daemon.
-  services.openssh = {
-    enable = true;
-    openFirewall = true;
-    settings = {
-      PasswordAuthentication = true;
-      KbdInteractiveAuthentication = true;
-      PermitRootLogin = "no";
-      AllowUsers = [ "anton" ];
-    };
-  };
-
   services.logind = {
     enable = true;
     settings.Login = {

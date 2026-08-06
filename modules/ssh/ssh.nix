@@ -17,8 +17,9 @@
 
     user = {
       openssh.authorizedKeys.keyFiles = let
-        is-pub-key = path: lib.hasSuffix (builtins.baseNameOf path) ".pub";
-      in builtins.filter is-pub-key (lib.filesystem.listFilesRecursive .);
+        is-pub-key = path: lib.hasSuffix ".pub" (builtins.baseNameOf path);
+      in 
+      builtins.filter is-pub-key (lib.filesystem.listFilesRecursive ./.);
     };
   };
 }
