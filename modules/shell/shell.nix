@@ -6,6 +6,7 @@
       nix-index
       sudo
       fish
+      neovim
     ];
   };
 }
