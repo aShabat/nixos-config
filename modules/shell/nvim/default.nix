@@ -1,7 +1,7 @@
 {
   den.aspects.neovim = {
     homeManager = {
-      programs.neovim.enabled = true;
+      programs.neovim.enable = true;
     };
   };
 }
