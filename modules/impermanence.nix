@@ -32,6 +32,7 @@ in {
 	  "/etc/nixos"
 	  "/var/lib/nixos"
 	  "/var/lib/systemd/coredump"
+	  "/var/lob/journal"
 	] ++ directories;
 	files = [
 	] ++ files;
