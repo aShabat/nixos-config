@@ -3,6 +3,7 @@
     includes = with den.aspects; [
       git
       nh
+      nix-index
     ];
   };
 }
