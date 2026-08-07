@@ -1,4 +1,4 @@
-{
+{den, ...} : {
   den.aspects.fish = {
     includes = [ den.aspects.aliases ];
    

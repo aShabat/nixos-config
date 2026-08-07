@@ -28,7 +28,7 @@
         };
       };
 
-      home.shellAliases.lg = "lazygit";
+      programs.fish.shellAbbrs.lg = "lazygit";
 
       home.packages = [ pkgs.git-crypt ];
     };
