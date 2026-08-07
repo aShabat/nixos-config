@@ -28,6 +28,8 @@
         };
       };
 
+      home.shellAliases.lg = "lazygit";
+
       home.packages = [ pkgs.git-crypt ];
     };
 
