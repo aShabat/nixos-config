@@ -5,7 +5,7 @@
     nixos =
       { pkgs, ... }:
       {
-        imports = [../old/configuration.nix];
+        imports = [../old/hardware-configuration.nix];
       };
   };
 }
