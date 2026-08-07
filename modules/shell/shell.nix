@@ -5,6 +5,7 @@
       nh
       nix-index
       sudo
+      fish
     ];
   };
 }
