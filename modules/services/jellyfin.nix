@@ -13,7 +13,7 @@
       "/var/lib/jellyfin"
     ];
 
-    caddy-configs."hierophant.antosha.xyz" = ''
+    caddy-configs."http://media.antosha.xyz" = ''
     reverse_proxy 127.0.0.1:8096
     '';
   };
