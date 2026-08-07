@@ -2,10 +2,7 @@
   inherit (den.lib) policy;
   root = "/dev/disk/by-label/nixos";
   root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root) )) + ".device";
-  directories = persist: lib.concatMap (p: p.directories or []) persist;
-  files = persist: lib.concatMap (p: p.files or []) persist;
-  home-directories = persist: lib.concatMap (p: p.home.directories or []) persist;
-  home-files = persist: lib.concatMap (p: p.home.files or []) persist;
+  collect-attrs = path: persist: lib.concatMap (p: lib.attrByPath path [] p) persist;
 in {
   flake-file.inputs.impermanence = {
     url = "github:nix-community/impermanence";
@@ -21,7 +18,10 @@ in {
 
   den.aspects.impermanence = {
     includes = [ den.policies.host-impermanence-for-users ];
-    nixos = {persist, ...} : {
+    nixos = {persist, ...} : let
+      directories = collect-attrs [ "directories" ] persist;
+      files = collect-attrs [ "files" ] persist;
+    in {
       imports = [ (inputs.impermanence.nixosModules.impermanence or {}) ];
 
       fileSystems."/persistent".neededForBoot = true;
@@ -32,9 +32,9 @@ in {
 	  "/etc/nixos"
 	  "/var/lib/nixos"
 	  "/var/lib/systemd/coredump"
-	] ++ (directories persist);
+	] ++ directories;
 	files = [
-	] ++ (files persist);
+	] ++ files;
       };
 
       boot.initrd = {
@@ -60,13 +60,16 @@ in {
       };
     };
 
-    homeManager = {persist, ...} : {
+    homeManager = {persist, ...} : let
+      directories = collect-attrs [ "home" "directories" ] persist;
+      files = collect-attrs [ "home" "files" ] persist;
+    in {
       home.persistence."/persistent" = {
         enable = true;
 	directories = [
-	] ++ (home-directories persist);
+	] ++ directories;
 	files = [
-	] ++ (home-files persist);
+	] ++ files;
       };
     };
 
