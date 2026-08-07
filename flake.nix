@@ -17,6 +17,10 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:vic/import-tree";
+    nix-index-database = {
+      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/nix-index-database";
+    };
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-lib.follows = "nixpkgs";
   };
