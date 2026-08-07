@@ -2,7 +2,7 @@
   den.quirks.caddy-configs = {};
 
   den.aspects.caddy = {
-    includes = [ den.aspects.firewall ];
+    includes = with den.aspects; [ firewall cloudflared ];
 
     nixos = {caddy-configs, ...} : let
       config-to-virtualHost = _: cfg: if (lib.isString cfg) then { listenAddresses = [ "127.0.0.1" ]; extraConfig = cfg; } else cfg;
@@ -19,6 +19,12 @@
     };
 
     persist.directories = [ "/var/lib/caddy" "/var/log/caddy" ];
+
+    caddy-configs = {
+      ":80" = ''
+        respond "Hello world!"
+      '';
+    };
   };
 
 }
