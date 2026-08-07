@@ -1,7 +1,9 @@
 {
-  den.aspects.neovim = {
+  den.aspects.neovim = {pkgs, ...} : {
     homeManager = {
-      programs.neovim.enable = true;
+      home.packages = with pkgs; [
+        neovim-unwrapped
+      ];
     };
   };
 }
