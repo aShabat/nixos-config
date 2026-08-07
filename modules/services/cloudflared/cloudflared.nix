@@ -9,7 +9,7 @@
 	tunnels = {
 	  "3ee421dd-2d64-4222-bec7-d6023865e11c" = lib.mkIf (match-host "hierophant") {
 	    credentialsFile = ./3ee421dd-2d64-4222-bec7-d6023865e11c.json.secret;
-	    default = "hello_world";
+	    default = "https://localhost:80";
 	  };
 	};
       };
