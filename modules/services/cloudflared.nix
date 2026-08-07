@@ -2,7 +2,8 @@
   den.aspects.cloudflared = {
     nixos = {
       services.cloudflared = {
-        enabled = true;
+        enable = true;
+	certificateFile = ./cert.pem.secret;
       };
     };
   };
