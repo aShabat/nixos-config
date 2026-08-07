@@ -11,6 +11,9 @@
 	    enableRemote = true;
 	  };
 	};
+	polkit = {
+	 settings.Polkitd.ExpirationSeconds = 600;
+	};
       };
     };
   };
