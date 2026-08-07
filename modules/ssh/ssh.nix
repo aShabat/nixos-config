@@ -1,5 +1,7 @@
-{lib, ...} : {
+{den, lib, ...} : {
   den.aspects.ssh = {
+    includes = [ den.aspects.firewall ];
+
     nixos = {user, ...} : {
       services.openssh = {
         enable = true;
