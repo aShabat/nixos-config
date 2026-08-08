@@ -6,11 +6,17 @@
       ...
     }: let
       concat-map-not-null = f: list: builtins.concatLists (builtins.filter (l: l != null) (builtins.map f list));
-      match-lines = regex: file: concat-map-not-null (line: builtins.match regex (lib.trim line)) (lib.splitString "\n" (builtins.readFile file));
-      fnl-files = builtins.filter (f: lib.hasSuffix ".fnl" (builtins.baseNameOf f)) (lib.filesystem.listFilesRecursive ./.);
+      match-lines = regex: file:
+        concat-map-not-null (line: builtins.match regex (lib.trim line)) (
+          lib.splitString "\n" (builtins.readFile file)
+        );
+      fnl-files = builtins.filter (f: lib.hasSuffix ".fnl" (builtins.baseNameOf f)) (
+        lib.filesystem.listFilesRecursive ./.
+      );
       fnl-pkgs-comments = builtins.concatMap (match-lines ".*;nix-pkgs:(.*)") fnl-files;
+      fnl-pkgs-split = builtins.concatMap (lib.splitString ":") fnl-pkgs-comments;
       pkgs-from-comment = comment: lib.getAttrFromPath (lib.splitString "." comment) pkgs;
-      fnl-pkgs = builtins.map pkgs-from-comment fnl-pkgs-comments;
+      fnl-pkgs = builtins.map pkgs-from-comment fnl-pkgs-split;
       runtimeInputs = with pkgs; [];
       my-nvim = pkgs.writeShellApplication {
         name = "nvim";
@@ -20,13 +26,15 @@
         '';
       };
     in {
-      home.packages = [
-        my-nvim
-      ];
+      home.packages = [my-nvim];
 
-      home.file.".config/nvim".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/modules/shell/neovim";
+      home.file.".config/nvim".source =
+        config.lib.file.mkOutOfStoreSymlink "/etc/nixos/modules/shell/neovim";
     };
 
-    persist.home.directories = [".local/state/nvim" ".local/share/nvim"];
+    persist.home.directories = [
+      ".local/state/nvim"
+      ".local/share/nvim"
+    ];
   };
 }

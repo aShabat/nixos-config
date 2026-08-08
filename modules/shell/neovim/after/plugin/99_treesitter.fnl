@@ -1,7 +1,4 @@
-;nix-pkgs:gnutar
-;nix-pkgs:curl
-;nix-pkgs:tree-sitter
-;nix-pkgs:gcc
+;nix-pkgs:gnutar:curl:tree-sitter:gcc
 (vim.pack.add [{:src "https://github.com/nvim-treesitter/nvim-treesitter"}])
 (local {: mapcat} (require :nfnl.core))
 (local nvim-treesitter (require :nvim-treesitter))
