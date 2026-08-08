@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "nfnl": {
+      "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
+      "src": "https://github.com/Olical/nfnl"
+    }
+  }
+}
