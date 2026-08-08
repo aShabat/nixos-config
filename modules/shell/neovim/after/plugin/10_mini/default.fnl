@@ -6,11 +6,14 @@
 
 (setup :mini.extra)
 
+;; Icons
 (setup :mini.icons)
 (MiniIcons.mock_nvim_web_devicons)
 
+;; Git
 (setup :mini.git)
 
+;; HiPatterns
 (setup :mini.hipatterns)
 (setup :mini.hipatterns
        {:highlighters {:fixme {:pattern :FIXME :group :MiniHiPatternsFixMe}
@@ -22,6 +25,7 @@
 (set vim.opt.cmdheight 0)
 (set vim.opt.showcmdloc :statusline)
 
+;; Status Line
 (let [active-content (fn []
                        (let [msl MiniStatusline
                              reg-recording (vim.fn.reg_recording)
@@ -59,15 +63,37 @@
                                                :strings [showcmd]}])))]
   (setup :mini.statusline {:content {:active active-content}}))
 
+;; Trailspace
 (setup :mini.trailspace)
 
+;; Notify
 (setup :mini.notify {:window {:max_width_share 0.7}})
 (set vim.notify (MiniNotify.make_notify {}))
 (vim.api.nvim_create_user_command :MNHistory
-                                  (fn [] (MiniNotify.show_history)
-                                    (vim.api.nvim_buf_keymap_set 0 :n :q
-                                                                 :<CMD>q<CR>)))
+                                  (fn []
+                                    (let [editor-width vim.o.columns
+                                          editor-height vim.o.lines]
+                                      (vim.api.nvim_open_win (vim.api.nvim_create_buf false
+                                                                                      true)
+                                                             true
+                                                             {:relative :editor
+                                                              :width (math.floor (* editor-width
+                                                                                    0.9))
+                                                              :height (math.floor (* editor-height
+                                                                                     0.8))
+                                                              :row (math.floor (* editor-height
+                                                                                  0.05))
+                                                              :col (math.floor (* editor-width
+                                                                                  0.05))
+                                                              :border :single
+                                                              :title [["Notification History"
+                                                                       :MiniFilesTitle]]}))
+                                    (MiniNotify.show_history)
+                                    (vim.api.nvim_buf_set_keymap 0 :n :q
+                                                                 :<CMD>q<CR> {}))
+                                  {})
 
+;; Move
 (setup :mini.move {:mappings {:left :H
                               :right :L
                               :up :K
@@ -77,15 +103,19 @@
                               :line_up :<C-k>
                               :line-down :<C-j>}})
 
+;; Splitjoin
 (setup :mini.splitjoin)
 
+;; AI
 (setup :mini.ai {:custom_textobjects {:G (MiniExtra.gen_ai_spec.buffer)
                                       :L (MiniExtra.gen_ai_spec.line)}
                  :search_method :cover
                  :n_lines math.huge})
 
+;; Bracketed
 (setup :mini.bracketed {:diagnostic {:option {:float true}}})
 
+;; Surround
 (setup :mini.surround)
 
 {}

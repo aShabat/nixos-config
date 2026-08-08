@@ -1,4 +1,4 @@
--- [nfnl] after/plugin/99_mini.fnl
+-- [nfnl] after/plugin/10_mini/default.fnl
 vim.pack.add({{src = "https://github.com/nvim-mini/mini.nvim"}})
 local function setup(package, _3fopts)
   local required = require(package)
@@ -42,10 +42,15 @@ setup("mini.trailspace")
 setup("mini.notify", {window = {max_width_share = 0.7}})
 vim.notify = MiniNotify.make_notify({})
 local function _3_()
+  do
+    local editor_width = vim.o.columns
+    local editor_height = vim.o.lines
+    vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {relative = "editor", width = math.floor((editor_width * 0.9)), height = math.floor((editor_height * 0.8)), row = math.floor((editor_height * 0.05)), col = math.floor((editor_width * 0.05)), border = "single", title = {{"Notification History", "MiniFilesTitle"}}})
+  end
   MiniNotify.show_history()
-  return vim.api.nvim_buf_keymap_set(0, "n", "q", "<CMD>q<CR>")
+  return vim.api.nvim_buf_set_keymap(0, "n", "q", "<CMD>q<CR>", {})
 end
-vim.api.nvim_create_user_command("MNHistory", _3_)
+vim.api.nvim_create_user_command("MNHistory", _3_, {})
 setup("mini.move", {mappings = {left = "H", right = "L", up = "K", down = "J", line_left = "", line_right = "", line_up = "<C-k>", ["line-down"] = "<C-j>"}})
 setup("mini.splitjoin")
 setup("mini.ai", {custom_textobjects = {G = MiniExtra.gen_ai_spec.buffer(), L = MiniExtra.gen_ai_spec.line()}, search_method = "cover", n_lines = math.huge})
