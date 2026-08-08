@@ -1,32 +1,44 @@
 -- [nfnl] after/plugin/10_mini/files.fnl
+local _local_1_ = require("nfnl.string")
+local split = _local_1_.split
+local _local_2_ = require("nfnl.core")
+local map = _local_2_.map
+local _local_3_ = require("nfnl.fs")
+local basename = _local_3_.basename
+local filename = _local_3_.filename
 local H = {}
-local function toggle_show()
+vim.api.nvim_create_augroup("user-minifiles", {})
+H["toggle-show"] = function()
   H["show-all"] = not H["show-all"]
   return MiniFiles.refresh(MiniFiles.config)
 end
-local function filter_strict(fs_entry)
+H["filter-fd"] = function(fs_entry)
+  local process = vim.system({"fd", "-q", "-g", filename(fs_entry.path), "-C", basename(fs_entry.path)})
+  local status = process:wait(1000).code
+  return (status == 0)
+end
+H["filter-strict"] = function(fs_entry)
   return not vim.startswith(fs_entry.name, ".")
 end
-local function filter(fs_entry)
+H.filter = function(fs_entry)
   if H["show-all"] then
     return true
   else
-    return filter_strict(fs_entry)
+    return H["filter-fd"](fs_entry)
   end
 end
-local group = vim.api.nvim_create_augroup("minifiles", {})
-local function _2_(args)
-  vim.keymap.set("n", "g.", toggle_show, {buffer = args.data.buf_id})
+local function _5_(args)
+  vim.keymap.set("n", "g.", H["toggle-show"], {buffer = args.data.buf_id})
   return print("test")
 end
-vim.api.nvim_create_autocmd("User", {pattern = "MiniFilesBufferCreate", callback = _2_, group = group})
+vim.api.nvim_create_autocmd("User", {pattern = "MiniFilesBufferCreate", group = "user-minifiles", callback = _5_})
 do
   local mf = require("mini.files")
-  mf.setup({options = {use_as_default_explorer = true}, content = {filter = filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
+  mf.setup({options = {use_as_default_explorer = true}, content = {filter = H.filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
 end
 do
   local file_explorer
-  local function _3_()
+  local function _6_()
     H["show-all"] = false
     local path = vim.api.nvim_buf_get_name(0)
     local path0 = vim.fs.normalize(path)
@@ -44,7 +56,7 @@ do
     MiniFiles.open(path1, false)
     return MiniFiles.trim_right()
   end
-  file_explorer = _3_
+  file_explorer = _6_
   vim.keymap.set("n", "<leader>e", file_explorer)
 end
 return {}
