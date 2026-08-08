@@ -1,11 +1,14 @@
 (set vim.g.mapleader " ")
 (set vim.g.maplocalleader ",")
-(vim.keymap.set "n" "," "<NOP>")
+(vim.keymap.set :n "," :<NOP>)
 
 (macro set-opts [name value & rest]
-  `(do (tset _G.vim.opt ,name ,value) 
-     ,(when (> (length rest) 0) `(set-opts ,(unpack rest)))))
+  `(do
+     (tset _G.vim.opt ,name ,value)
+     ,(when (> (length rest) 0)
+        `(set-opts ,(unpack rest)))))
 
+;; fnlfmt: skip
 (set-opts
   :number true
   :relativenumber true
@@ -44,6 +47,4 @@
 
   :colorcolumn "80")
 
-
 {}
-
