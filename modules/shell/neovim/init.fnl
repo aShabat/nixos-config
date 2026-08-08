@@ -1,5 +1,4 @@
-(vim.pack.add [
-	       { :src "https://github.com/Olical/nfnl" }
-	       ])
-
+;nix-pkgs:git
+;nix-pkgs:curl
+;nix-pkgs:ripgrep
 {}
