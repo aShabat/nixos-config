@@ -3,7 +3,7 @@
 (local {: basename : filename} (require :nfnl.fs))
 
 (vim.pack.add [{:src "https://github.com/nvim-mini/mini.nvim"}])
-(vim.api.nvim_create_augroup :user-minifiles {})
+(local group (vim.api.nvim_create_augroup :user-minifiles {}))
 
 (local H {})
 
@@ -29,7 +29,7 @@
 
 (vim.api.nvim_create_autocmd :User
                              {:pattern :MiniFilesBufferCreate
-                              :group :user-minifiles
+                              : group
                               :callback (fn [args]
                                           (vim.keymap.set :n :g. H.toggle-show
                                                           {:buffer args.data.buf_id})

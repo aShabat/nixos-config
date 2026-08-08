@@ -1,8 +1,8 @@
 (vim.pack.add [{:src "https://github.com/nvim-mini/mini.nvim"}])
 
-(fn setup [package ?opts]
-  (let [required (require package)]
-    (required.setup (or opts {}))))
+(macro setup [package ?opts]
+  `(let [package# (require ,package)]
+     ,(if ?opts `(package#.setup ,?opts) `(package#.setup))))
 
 (setup :mini.extra)
 
@@ -109,6 +109,7 @@
 ;; AI
 (setup :mini.ai {:custom_textobjects {:G (MiniExtra.gen_ai_spec.buffer)
                                       :L (MiniExtra.gen_ai_spec.line)}
+                 :mappings {:around_next "" :inside_next ""}
                  :search_method :cover
                  :n_lines math.huge})
 
