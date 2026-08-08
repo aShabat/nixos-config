@@ -1,9 +1,13 @@
 (local {: split} (require :nfnl.string))
 (local {: map} (require :nfnl.core))
 (local {: basename : filename} (require :nfnl.fs))
-(local H {})
+
+(vim.pack.add [{:src "https://github.com/nvim-mini/mini.nvim"}])
 (vim.api.nvim_create_augroup :user-minifiles {})
 
+(local H {})
+
+(set H.show-all false)
 (fn H.toggle-show []
   (set H.show-all (not H.show-all))
   (MiniFiles.refresh MiniFiles.config))
@@ -31,14 +35,13 @@
                                                           {:buffer args.data.buf_id})
                                           (print :test))})
 
-(let [mf (require :mini.files)]
-  (mf.setup {:options {:use_as_default_explorer true}
-             :content {:filter H.filter}
-             :windows {:width_preview 100}
-             :mappings {:go_in :L :go_in_plus :l}}))
+(let [MiniFiles (require :mini.files)]
+  (MiniFiles.setup {:options {:use_as_default_explorer true}
+                    :content {:filter H.filter}
+                    :windows {:width_preview 100}
+                    :mappings {:go_in :L :go_in_plus :l}}))
 
 (let [file-explorer (fn []
-                      (set H.show-all false)
                       (let [path (vim.api.nvim_buf_get_name 0)
                             path (vim.fs.normalize path)
                             path (if (= (vim.fn.filereadable path) 0)

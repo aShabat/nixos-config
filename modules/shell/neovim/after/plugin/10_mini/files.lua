@@ -6,8 +6,10 @@ local map = _local_2_.map
 local _local_3_ = require("nfnl.fs")
 local basename = _local_3_.basename
 local filename = _local_3_.filename
-local H = {}
+vim.pack.add({{src = "https://github.com/nvim-mini/mini.nvim"}})
 vim.api.nvim_create_augroup("user-minifiles", {})
+local H = {}
+H["show-all"] = false
 H["toggle-show"] = function()
   H["show-all"] = not H["show-all"]
   return MiniFiles.refresh(MiniFiles.config)
@@ -33,13 +35,12 @@ local function _5_(args)
 end
 vim.api.nvim_create_autocmd("User", {pattern = "MiniFilesBufferCreate", group = "user-minifiles", callback = _5_})
 do
-  local mf = require("mini.files")
-  mf.setup({options = {use_as_default_explorer = true}, content = {filter = H.filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
+  local MiniFiles = require("mini.files")
+  MiniFiles.setup({options = {use_as_default_explorer = true}, content = {filter = H.filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
 end
 do
   local file_explorer
   local function _6_()
-    H["show-all"] = false
     local path = vim.api.nvim_buf_get_name(0)
     local path0 = vim.fs.normalize(path)
     local path1
