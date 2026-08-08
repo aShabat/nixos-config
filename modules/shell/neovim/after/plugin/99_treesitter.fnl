@@ -10,5 +10,7 @@
       filetypes (mapcat vim.treesitter.language.get_filetypes languages)]
   (vim.api.nvim_create_autocmd :FileType
                                {:pattern filetypes
-                                :callback (fn [] (vim.treesitter.start))
+                                :callback (fn [] (vim.treesitter.start)
+                                            (set vim.bo.indentexpr
+                                                 "v:lua()require'nvim-treesitter'.indentexpr()"))
                                 : group}))

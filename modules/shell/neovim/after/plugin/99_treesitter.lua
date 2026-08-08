@@ -8,6 +8,8 @@ local group = vim.api.nvim_create_augroup("treesitter", {})
 local languages = nvim_treesitter.get_installed()
 local filetypes = mapcat(vim.treesitter.language.get_filetypes, languages)
 local function _2_()
-  return vim.treesitter.start()
+  vim.treesitter.start()
+  vim.bo.indentexpr = "v:lua()require'nvim-treesitter'.indentexpr()"
+  return nil
 end
 return vim.api.nvim_create_autocmd("FileType", {pattern = filetypes, callback = _2_, group = group})
