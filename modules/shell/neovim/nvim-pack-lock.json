@@ -11,6 +11,10 @@
     "nfnl": {
       "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
       "src": "https://github.com/Olical/nfnl"
+    },
+    "nvim-treesitter": {
+      "rev": "c9f9ed6c1892f629ea399f4ee7905f2686fa13f2",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     }
   }
 }
