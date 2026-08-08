@@ -1,4 +1,4 @@
--- [nfnl] after/plugin/10_mini/default.fnl
+-- [nfnl] after/plugin/10_mini/common.fnl
 vim.pack.add({{src = "https://github.com/nvim-mini/mini.nvim"}})
 local function setup(package, _3fopts)
   local required = require(package)
