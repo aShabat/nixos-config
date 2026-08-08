@@ -10,3 +10,5 @@
 (vim.keymap.set :n :<Leader>fh MiniPick.registry.help)
 (vim.keymap.set :n :<Leader>fb MiniPick.registry.buffers)
 (vim.keymap.set :n :<Leader>fg MiniPick.registry.grep_live)
+
+{}

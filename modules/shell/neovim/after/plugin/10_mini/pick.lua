@@ -8,4 +8,5 @@ vim.ui.select = MiniPick.ui_select
 vim.keymap.set("n", "<Leader>ff", MiniPick.registry.files)
 vim.keymap.set("n", "<Leader>fh", MiniPick.registry.help)
 vim.keymap.set("n", "<Leader>fb", MiniPick.registry.buffers)
-return vim.keymap.set("n", "<Leader>fg", MiniPick.registry.grep_live)
+vim.keymap.set("n", "<Leader>fg", MiniPick.registry.grep_live)
+return {}

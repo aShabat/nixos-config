@@ -9,3 +9,5 @@
             :format_on_save {:timeout_ms 500 :lsp_format :fallback}}]
   (conform.setup opts)
   (vim.api.nvim_create_user_command :Format conform.format {}))
+
+{}
