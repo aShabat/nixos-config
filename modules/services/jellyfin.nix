@@ -1,7 +1,7 @@
-{den, ...} : {
+{den, ...}: {
   den.aspects.jellyfin = {
-    includes = [ den.aspects.caddy ];
-  
+    includes = [den.aspects.caddy];
+
     nixos = {
       services.jellyfin = {
         enable = true;
@@ -14,7 +14,7 @@
     ];
 
     caddy-configs."http://media.antosha.xyz" = ''
-    reverse_proxy 127.0.0.1:8096
+      reverse_proxy 127.0.0.1:8096
     '';
   };
 }

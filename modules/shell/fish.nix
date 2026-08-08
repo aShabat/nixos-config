@@ -1,22 +1,22 @@
-{den, ...} : {
+{den, ...}: {
   den.aspects.fish = {
-    includes = [ den.aspects.aliases ];
-   
+    includes = [den.aspects.aliases];
+
     nixos = {
       programs.fish.enable = true;
     };
 
-    user = {config, ...} : {
+    user = {config, ...}: {
       shell = config.programs.fish.package;
     };
 
     homeManager = {
       programs.fish = {
         enable = true;
-	preferAbbrs = true;
+        preferAbbrs = true;
       };
     };
 
-    persist.home.files = [ ".local/share/fish/fish_history" ];
+    persist.home.files = [".local/share/fish/fish_history"];
   };
 }

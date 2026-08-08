@@ -1,6 +1,6 @@
-{lib, ...} : {
+{lib, ...}: {
   den.aspects.user-password = {
-    user = {user, ...} : {
+    user = {user, ...}: {
       hashedPasswordFile = builtins.toString (./. + "/${user.userName}.secret");
     };
   };

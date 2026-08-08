@@ -1,6 +1,6 @@
-{den, ...} : {
+{den, ...}: {
   den.aspects.nix = {
-    includes = [ den.aspects.home-manager ];
+    includes = [den.aspects.home-manager];
 
     nixos = {
       nix.extraOptions = ''
