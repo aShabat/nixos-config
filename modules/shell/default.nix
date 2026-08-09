@@ -7,6 +7,7 @@
       sudo
       fish
       neovim
+      fzf
     ];
   };
 }
