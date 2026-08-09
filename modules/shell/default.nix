@@ -8,6 +8,7 @@
       fish
       neovim
       fzf
+      eza
     ];
   };
 }
