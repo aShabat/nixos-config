@@ -25,6 +25,7 @@
 
         lazygit = {
           enable = true;
+          enableFishIntegration = false;
         };
       };
 
