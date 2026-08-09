@@ -15,6 +15,8 @@
         enable = true;
         preferAbbrs = true;
       };
+
+      home.shell.enableFishIntegration = false;
     };
 
     persist.home.files = [".local/share/fish/fish_history"];
