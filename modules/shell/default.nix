@@ -9,6 +9,7 @@
       neovim
       fzf
       eza
+      zoxide
     ];
   };
 }
