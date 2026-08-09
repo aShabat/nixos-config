@@ -14,6 +14,13 @@
       programs.fish = {
         enable = true;
         preferAbbrs = true;
+
+        binds = {
+          ctrl-s = {
+            command = "fish_commandline_prepend sudo";
+            repaint = true;
+          };
+        };
       };
 
       home.shell.enableFishIntegration = false;
