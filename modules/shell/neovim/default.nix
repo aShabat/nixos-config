@@ -1,5 +1,5 @@
 {lib, ...}: {
-  den.aspects.neovim = {
+  den.aspects.shell.neovim = {
     homeManager = {
       pkgs,
       config,

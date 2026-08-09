@@ -1,5 +1,5 @@
 {
-  den.aspects.nh = {
+  den.aspects.shell.nh = {
     homeManager = {
       programs.nh = {
         enable = true;

@@ -1,5 +1,5 @@
 {
-  den.aspects.aliases = {
+  den.aspects.shell.aliases = {
     homeManager = {
       programs.fish.shellAbbrs = {
         s = "systemctl";

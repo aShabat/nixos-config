@@ -1,6 +1,6 @@
 {den, ...}: {
   den.aspects.shell = {
-    includes = with den.aspects; [
+    includes = with den.aspects.shell; [
       git
       nh
       nix-index

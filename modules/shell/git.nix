@@ -1,5 +1,5 @@
 {
-  den.aspects.git = {
+  den.aspects.shell.git = {
     homeManager = {pkgs, ...}: {
       programs = {
         git = {

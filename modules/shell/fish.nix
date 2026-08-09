@@ -1,6 +1,6 @@
 {den, ...}: {
-  den.aspects.fish = {
-    includes = [den.aspects.aliases];
+  den.aspects.shell.fish = {
+    includes = [den.aspects.shell.aliases];
 
     nixos = {
       programs.fish.enable = true;

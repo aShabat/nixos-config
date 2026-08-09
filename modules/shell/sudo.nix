@@ -1,5 +1,5 @@
 {
-  den.aspects.sudo = {
+  den.aspects.shell.sudo = {
     nixos = {
       security = {
         sudo.enable = false;
