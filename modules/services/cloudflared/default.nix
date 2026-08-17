@@ -5,10 +5,10 @@
     in {
       services.cloudflared = {
         enable = true;
-        certificateFile = ./cert.pem.secret;
+        certificateFile = ./cert.secret.pem;
         tunnels = {
-          "3ee421dd-2d64-4222-bec7-d6023865e11c" = lib.mkIf (match-host "hierophant") {
-            credentialsFile = ./3ee421dd-2d64-4222-bec7-d6023865e11c.json.secret;
+          "ada01390-9695-4235-bce2-4317aff132c1" = lib.mkIf (match-host "scribe") {
+            credentialsFile = ./ada01390-9695-4235-bce2-4317aff132c1.json.secret;
             default = "http://localhost:80";
           };
         };

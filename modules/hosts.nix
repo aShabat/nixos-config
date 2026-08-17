@@ -2,4 +2,5 @@
 # then config their aspects in as many files you want
 {
   den.hosts.x86_64-linux.hierophant.users.anton = {};
+  den.hosts.x86_64-linux.scribe.users.anton = {};
 }
