@@ -1,18 +1,6 @@
 -- [nfnl] after/plugin/99_blink.fnl
-local function build_blink(params)
-  if (params.spec.name == "blink.cmp") then
-    vim.notify("Building blink.cmp", vim.log.levels.INFO)
-    local obj
-    local tgt_1_ = vim.system({"cargo", "build", "--release"}, {cwd = params.path})
-    obj = (tgt_1_)[wait](tgt_1_)
-    if (obj.code == 0) then
-      return vim.notify("Building blink.cmp done", vim.log.levels.INFO)
-    else
-      return vim.notify("Building blink.cmp failed", vim.log.levels.INFO)
-    end
-  else
-    return nil
-  end
-end
-vim.api.nvim_create_autocmd("PackChanged", {callback = build_blink})
-return vim.pack.add({{src = "https://github.com/saghen/blink.cmp"}})
+vim.pack.add({"https://github.com/saghen/blink.lib", "https://github.com/saghen/blink.cmp"})
+local cmp = require("blink.cmp")
+cmp.build():pwait()
+cmp.setup({cmdline = {}, completion = {keyword = {range = "full"}, trigger = {show_on_backspace = true}, accept = {auto_brackets = {enabled = false}}, documentation = {auto_show = true}}, sources = {default = {"lsp", "path", "snippets", "buffer"}}})
+return {}
