@@ -1,6 +1,6 @@
 {den, ...}: {
   den.aspects.scribe = {
-    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot cloudflared caddy pocket-id];
+    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot cloudflared caddy pocket-id netbird.server];
 
     nixos = {
       config,
