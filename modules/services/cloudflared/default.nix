@@ -8,7 +8,7 @@
         certificateFile = ./cert.secret.pem;
         tunnels = {
           "ada01390-9695-4235-bce2-4317aff132c1" = lib.mkIf (match-host "scribe") {
-            credentialsFile = ./ada01390-9695-4235-bce2-4317aff132c1.json.secret;
+            credentialsFile = ./ada01390-9695-4235-bce2-4317aff132c1.secret.json;
             default = "http://localhost:80";
           };
         };
