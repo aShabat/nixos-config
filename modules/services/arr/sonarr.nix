@@ -3,10 +3,6 @@
     nixos = {
       services.sonarr = {
         enable = true;
-
-        settings = {
-          update.automatically = true;
-        };
       };
     };
 
