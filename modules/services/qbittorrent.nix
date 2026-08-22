@@ -8,7 +8,7 @@
         inherit torrentingPort;
       };
 
-      networking.firewall.allowedTCPPorts = torrentingPort;
+      networking.firewall.allowedTCPPorts = [torrentingPort];
     };
 
     caddy-configs."http://torrent.antosha.xyz" = ''
