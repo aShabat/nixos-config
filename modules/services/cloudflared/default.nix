@@ -7,7 +7,7 @@
         enable = true;
         certificateFile = ./cert.secret.pem;
         tunnels = {
-          "ada01390-9695-4235-bce2-4317aff132c1" = lib.mkIf (match-host "scribe") {
+          "ada01390-9695-4235-bce2-4317aff132c1" = lib.mkIf (match-host "hierophant") {
             credentialsFile = ./ada01390-9695-4235-bce2-4317aff132c1.secret.json;
             default = "http://localhost:80";
           };
