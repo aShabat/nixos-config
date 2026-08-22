@@ -5,9 +5,13 @@
     nixos = {
       services.jellyfin = {
         enable = true;
+        hardwareAcceleration = {
+          enable = true;
+          device = /dev/dri/renderD128;
+        };
       };
 
-      users.users.jellyfin.extraGroups = ["media"];
+      users.users.jellyfin.extraGroups = ["media" "render"];
     };
 
     persist.directories = [
