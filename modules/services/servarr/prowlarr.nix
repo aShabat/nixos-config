@@ -10,6 +10,6 @@
       reverse_proxy 127.0.0.1:9696
     '';
 
-    persist.directories = ["/var/lib/prowlarr"];
+    persist.directories = ["/var/lib/private/prowlarr"];
   };
 }
