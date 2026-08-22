@@ -4,6 +4,8 @@
       services.radarr = {
         enable = true;
       };
+
+      users.users.radarr.extraGroups = ["media"];
     };
 
     caddy-configs."http://radarr.antosha.xyz" = ''

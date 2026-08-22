@@ -7,5 +7,9 @@
       aspects.keyring
       aspects.ssh
     ];
+
+    user = {
+      extraGroups = ["media"];
+    };
   };
 }

@@ -4,6 +4,8 @@
       services.bazarr = {
         enable = true;
       };
+
+      users.users.bazarr.extraGroups = ["media"];
     };
 
     persist.directories = ["/var/lib/bazarr"];
