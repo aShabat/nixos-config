@@ -42,7 +42,7 @@ in {
             "/etc/nixos"
             "/var/lib/nixos"
             "/var/lib/systemd/coredump"
-            "/var/lob/journal"
+            "/var/log/journal"
           ]
           ++ directories;
         files =
