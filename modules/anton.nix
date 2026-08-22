@@ -11,5 +11,9 @@
     user = {
       extraGroups = ["media"];
     };
+
+    nixos = {
+      users.groups.media = {};
+    };
   };
 }
