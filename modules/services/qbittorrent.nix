@@ -15,6 +15,6 @@
       reverse_proxy 127.0.0.1:8080
     '';
 
-    persist.directories = ["/var/lib/qbittorrent"];
+    persist.directories = ["/var/lib/qBittorrent"];
   };
 }
