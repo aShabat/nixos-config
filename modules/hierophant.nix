@@ -1,6 +1,6 @@
 {den, ...}: {
   den.aspects.hierophant = {
-    includes = with den.aspects; [network-manager impermanence ssh nix jellyfin qbittorrent close-lid boot sonarr];
+    includes = with den.aspects; [network-manager impermanence ssh nix jellyfin qbittorrent close-lid boot servarr];
 
     nixos = {
       config,
