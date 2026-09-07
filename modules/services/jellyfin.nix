@@ -7,11 +7,13 @@
         enable = true;
         hardwareAcceleration = {
           enable = true;
-          device = /dev/dri/renderD128;
+          device = "/dev/dri/renderD128";
+          type = "qsv";
         };
       };
 
-      users.users.jellyfin.extraGroups = ["media" "render"];
+      hardware.graphics.enable = true;
+      users.users.jellyfin.extraGroups = ["media" "render" "video"];
     };
 
     persist.directories = [
