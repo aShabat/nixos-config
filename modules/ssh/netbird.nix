@@ -10,6 +10,7 @@
           enable = true;
           setupKeyFile = "/etc/nixos/modules/ssh/netbird_key.secret";
         };
+        port = 51820;
       };
     };
   };
