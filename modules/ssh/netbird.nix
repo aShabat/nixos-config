@@ -13,5 +13,6 @@
         port = 51820;
       };
     };
+    persist.directories = ["/var/lib/netbird-wl0/"];
   };
 }
