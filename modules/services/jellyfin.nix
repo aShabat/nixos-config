@@ -2,7 +2,7 @@
   den.aspects.jellyfin = {
     includes = [den.aspects.caddy];
 
-    nixos = {
+    nixos = {pkgs, ...}: {
       services.jellyfin = {
         enable = true;
         hardwareAcceleration = {
@@ -12,7 +12,10 @@
         };
       };
 
-      hardware.graphics.enable = true;
+      hardware.graphics = {
+        enable = true;
+        extraPackages = with pkgs; [intel-media-driver intel-vaapi-driver];
+      };
       users.users.jellyfin.extraGroups = ["media" "render" "video"];
     };
 

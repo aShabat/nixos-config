@@ -6,7 +6,7 @@
 
     homeManager = {pkgs, ...}: {
       services.gnome-keyring.enable = true;
-      home.packages = [pkgs.gcr];
+      home.packages = [pkgs.gcr_3];
 
       programs.gpg.enable = true;
 
