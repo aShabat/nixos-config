@@ -1,6 +1,6 @@
 {den, ...}: {
   den.aspects.archer = {
-    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot];
+    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot netbird];
 
     nixos = {
       config,
@@ -42,11 +42,11 @@
         options = ["subvol=swap"];
       };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F962-80B8";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+      fileSystems."/boot" = {
+        device = "/dev/disk/by-uuid/F962-80B8";
+        fsType = "vfat";
+        options = ["fmask=0022" "dmask=0022"];
+      };
 
       swapDevices = [];
 
