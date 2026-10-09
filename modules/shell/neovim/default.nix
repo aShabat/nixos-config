@@ -32,7 +32,7 @@
         config.lib.file.mkOutOfStoreSymlink "/etc/nixos/modules/shell/neovim";
 
       home.activation.syncVimPack = config.lib.dag.entryAfter ["writeBoundary"] ''
-        ${my-nvim}/bin/nvim --headless '+lua vim.pack.update({}, { target = "lockfile" })' +qa
+        ${my-nvim}/bin/nvim --headless '+lua vim.pack.update({}, { target = "lockfile", force = true })' +qa
       '';
     };
 
