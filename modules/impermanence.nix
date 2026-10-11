@@ -82,6 +82,9 @@ in {
         enable = true;
         directories =
           [
+            "Downloads"
+            "Documents"
+            "Projects"
           ]
           ++ directories;
         files =

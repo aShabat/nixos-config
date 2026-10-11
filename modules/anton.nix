@@ -6,6 +6,7 @@
       aspects.shell
       aspects.keyring
       aspects.ssh
+      aspects.ghostty
     ];
 
     user = {

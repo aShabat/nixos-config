@@ -1,6 +1,6 @@
 {den, ...}: {
   den.aspects.archer = {
-    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot netbird];
+    includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot netbird gnome];
 
     nixos = {
       config,
