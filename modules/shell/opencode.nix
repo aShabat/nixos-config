@@ -5,5 +5,10 @@
         enable = true;
       };
     };
+
+    persist.home.directories = [
+      ".config/opencode"
+      ".local/share/opencode"
+    ];
   };
 }
