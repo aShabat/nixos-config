@@ -10,6 +10,7 @@
       fzf
       eza
       zoxide
+      opencode
     ];
   };
 }
