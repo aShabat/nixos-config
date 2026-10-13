@@ -5,8 +5,8 @@
       services.desktopManager.gnome.enable = true;
 
       services.gnome = {
-        core-apps.enable = false;
-        core-developer-tools.enable = false;
+        core-apps.enable = true;
+        core-developer-tools.enable = true;
         games.enable = false;
       };
 
