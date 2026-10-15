@@ -1,3 +1,3 @@
 {config, ...}: {
-  _module.args = config.utils || {};
+  _module.args.utils = config.utils or config.utils;
 }
