@@ -1,8 +1,12 @@
 {
   den.aspects.network-manager = {
-    nixos = {
-      networking.networkmanager.enable = true;
-    };
+    nixos = {pkgs, ...}:
+      !{
+        networking.networkmanager = {
+          enable = true;
+          plugins = with pkgs; [networkmanager-openvpn];
+        };
+      };
 
     persist.directories = [
       "/etc/NetworkManager/system-connections"
