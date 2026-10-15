@@ -28,6 +28,9 @@
     lib.map (name: pathToAspect (path + "/${name}"))
     (lib.filter (name: !(lib.elem (lib.removeSuffix ".nix" name) opts.exclude or [])) (listChildren path));
 in {
-  den.aspects = pathToAspect ../aspects;
+  den.aspects =
+    if (lib.pathExists ../aspects)
+    then pathToAspect ../aspects
+    else {};
   utils.aspects = {inherit listSubAspects;};
 }
