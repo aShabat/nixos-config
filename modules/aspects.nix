@@ -1,4 +1,8 @@
-{lib, ...} @ args: let
+{
+  lib,
+  config,
+  ...
+} @ args: let
   isNixFile = lib.hasSuffix ".nix";
   isDir = name: !(lib.hasInfix "." name);
   listChildren = path: lib.filter (name: (isNixFile name || isDir name) && name != "default.nix") (lib.attrNames (lib.readDir path));
@@ -7,11 +11,17 @@
   hasDefault = path: lib.pathExists (path + "/default.nix");
   smartImport = path: let
     body = import path;
+    bodyArgs = lib.functionArgs body;
+    moduleArgs =
+      lib.mapAttrs (
+        name: _: args.${name} or config._module.args.${name}
+      )
+      bodyArgs;
   in
     if (lib.isFunction body)
-    then (body args)
+    then (body (args // moduleArgs))
     else body;
-  pathToAspect = path: let
+  pathToAspectHelper = writeIncludes: path: let
     name = lib.baseNameOf path;
   in
     if (isNixFile name && name != "default.nix")
@@ -23,15 +33,18 @@
         then (throw "Duplicate aspect names")
         else if (hasDefault path)
         then (smartImport (path + "/default.nix"))
-        else {includes = listSubAspects path {};}
+        else if writeIncludes
+        then {includes = listSubAspects path {};}
+        else {}
       )
       // lib.listToAttrs (lib.map (name: {
         name = lib.removeSuffix ".nix" name;
-        value = pathToAspect (path + "/${name}");
+        value = pathToAspectHelper true (path + "/${name}");
       }) (listChildren path))
     else {};
+  pathToAspect = pathToAspectHelper false;
   listSubAspects = path: opts:
-    lib.map (name: pathToAspect (path + "/${name}"))
+    lib.map (name: pathToAspectHelper true (path + "/${name}"))
     (lib.filter (name: !(lib.elem (lib.removeSuffix ".nix" name) opts.exclude or [])) (listChildren path));
 in {
   den.aspects =
