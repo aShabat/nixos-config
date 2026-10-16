@@ -1,22 +1,28 @@
-{lib, ...}: let
+{lib, ...} @ args: let
   isNixFile = lib.hasSuffix ".nix";
   isDir = name: !(lib.hasInfix "." name);
   listChildren = path: lib.filter (name: (isNixFile name || isDir name) && name != "default.nix") (lib.attrNames (lib.readDir path));
   hasDuplicates = list: (lib.length list) != (lib.length (lib.unique list));
   hasDuplicateChildren = path: hasDuplicates (map (lib.removeSuffix ".nix") (listChildren path));
   hasDefault = path: lib.pathExists (path + "/default.nix");
+  smartImport = path: let
+    body = import path;
+  in
+    if (lib.isFunction body)
+    then (body args)
+    else body;
   pathToAspect = path: let
     name = lib.baseNameOf path;
   in
     if (isNixFile name && name != "default.nix")
-    then (import path)
+    then (smartImport path)
     else if (isDir name)
     then
       (
         if (hasDuplicateChildren path)
         then (throw "Duplicate aspect names")
         else if (hasDefault path)
-        then (import (path + "/default.nix"))
+        then (smartImport (path + "/default.nix"))
         else {includes = listSubAspects path {};}
       )
       // lib.listToAttrs (lib.map (name: {
