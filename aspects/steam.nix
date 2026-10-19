@@ -1,7 +1,10 @@
-{
+{den, ...}: {
+  includes = with den.aspects; [unfree];
   nixos = {
     programs.steam.enable = true;
   };
 
-  persist.home.directories = [".steamd" ".local/share/Steam"];
+  persist.home.directories = [".steam" ".local/share/Steam"];
+
+  provides.to-users = {includes = with den.aspects; [steam];};
 }
