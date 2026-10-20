@@ -9,21 +9,9 @@
   root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root))) + ".device";
   collect-attrs = path: persist: lib.concatMap (p: lib.attrByPath path [] p) persist;
 in {
-  flake-file.inputs.impermanence = {
-    url = "github:nix-community/impermanence";
-  };
-
   den.quirks.persist = {
     description = "impermanence files and directories";
   };
-
-  # den.policies.host-impermanence-for-users = {
-  #   host,
-  #   user,
-  #   ...
-  # }: [
-  #   (policy.include den.aspects.impermanence)
-  # ];
 
   den.aspects.impermanence = {
     provides.to-users = {includes = [den.aspects.impermanence];};
