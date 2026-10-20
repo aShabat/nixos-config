@@ -1,5 +1,16 @@
 {den, ...}: {
-  includes = with den.aspects; [network-manager impermanence ssh ssh.netbird nix jellyfin qbittorrent close-lid boot servarr];
+  includes = with den.aspects; [
+    network-manager
+    impermanence
+    ssh
+    ssh.netbird
+    nix
+    close-lid
+    boot
+    services.qbittorrent
+    services.jellyfin
+    services.servarr
+  ];
 
   nixos = {
     config,
