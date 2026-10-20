@@ -10,5 +10,5 @@
 
   persist.home.directories = [".steam" ".local/share/Steam"];
 
-  provides.to-users = {includes = [(aspect-utils.self den)];};
+  provides.to-users = {includes = [aspect-utils.self];};
 }

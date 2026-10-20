@@ -30,37 +30,52 @@
       }
     else null;
 
-  generateAspectUtils = {
+  generateAspectUtils = {den, ...}: {
     attrPath,
     children ? [],
     ...
   }: {
-    includes-all-subaspects = den: lib.map (name: lib.getAttrFromPath (attrPath ++ [name]) den) (lib.map (c: c.name) children);
-    includes-all-subaspects-except = exclude: den:
+    includes-all-subaspects = lib.map (name: lib.getAttrFromPath (attrPath ++ [name]) den) (lib.map (c: c.name) children);
+    includes-all-subaspects-except = exclude:
       lib.map (name: lib.getAttrFromPath (attrPath ++ [name]) den) (lib.subtractLists exclude (lib.map (c: c.name) children));
-    self = den: lib.getAttrFromPath attrPath den;
+    self = lib.getAttrFromPath attrPath den;
   };
 
   importWithArgs = args: config: {path, ...} @ aspectNode: let
     imported = import path;
   in
-    if lib.isFunction imported
-    then let
-      required = lib.functionArgs imported;
-      aspectArgs = lib.mapAttrs (name: _:
+    if !lib.isFunction imported
+    then imported
+    else let
+      importedArgs = lib.functionArgs imported;
+      requiresAspectUtils = lib.hasAttr "aspect-utils" importedArgs;
+      requiredArgs =
+        importedArgs
+        // (
+          if requiresAspectUtils
+          then (lib.functionArgs generateAspectUtils)
+          else {}
+        );
+      resolveArg = name:
         args.${
           name
         } or config._module.args.${
           name
         } or (
           if name == "aspect-utils"
-          then generateAspectUtils aspectNode
+          then null
           else throw "Not a valid aspect arg"
-        ))
-      required;
+        );
+      resolvedArgs = lib.mapAttrs (name: _: resolveArg name) requiredArgs;
+      aspect-utils =
+        if requiresAspectUtils
+        then generateAspectUtils resolvedArgs aspectNode
+        else {};
+      passedArgs =
+        lib.filterAttrs (name: _: lib.hasAttr name importedArgs) resolvedArgs
+        // lib.optionalAttrs requiresAspectUtils {inherit aspect-utils;};
     in
-      imported aspectArgs
-    else imported;
+      imported passedArgs;
 
   generateAspectImports = {
     name,
@@ -79,7 +94,7 @@
       else if name == "aspects"
       then []
       else [
-        ({den, ...}: {den = lib.setAttrByPath attrPath {includes = (generateAspectUtils aspectNode).includes-all-subaspects den;};})
+        ({den, ...}: {den = lib.setAttrByPath attrPath {includes = (generateAspectUtils {inherit den;} aspectNode).includes-all-subaspects;};})
       ]
     )
     ++ lib.concatMap generateAspectImports children;
