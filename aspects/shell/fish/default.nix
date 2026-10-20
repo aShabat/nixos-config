@@ -1,8 +1,10 @@
-{den, ...}: {
-  includes = [den.aspects.shell.aliases];
+{
+  nixos = {lib, ...}: {
+    programs.fish = {
+      enable = true;
+    };
 
-  nixos = {
-    programs.fish.enable = true;
+    environment.etc."fish/config.fish".text = lib.mkForce "";
   };
 
   user = {config, ...}: {
