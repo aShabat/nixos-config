@@ -1,12 +1,5 @@
 {den, ...}: {
   includes = with den.aspects; [
-    network-manager
-    impermanence
-    ssh
-    ssh.netbird
-    nix
-    close-lid
-    boot
     services.qbittorrent
     services.jellyfin
     services.servarr
