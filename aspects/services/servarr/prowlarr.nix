@@ -1,5 +1,6 @@
 {den, ...}: {
   includes = [den.aspects.services.caddy];
+
   nixos = {
     services.prowlarr = {
       enable = true;
