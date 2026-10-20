@@ -1,5 +1,5 @@
 {den, ...}: {
-  includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot ssh.netbird gnome steam];
+  includes = with den.aspects; [network-manager impermanence ssh nix close-lid boot ssh.netbird desktop.gnome steam];
 
   nixos = {
     config,
