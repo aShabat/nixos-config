@@ -17,16 +17,16 @@ in {
     description = "impermanence files and directories";
   };
 
-  den.policies.host-impermanence-for-users = {
-    host,
-    user,
-    ...
-  }: [
-    (policy.include den.aspects.impermanence)
-  ];
+  # den.policies.host-impermanence-for-users = {
+  #   host,
+  #   user,
+  #   ...
+  # }: [
+  #   (policy.include den.aspects.impermanence)
+  # ];
 
   den.aspects.impermanence = {
-    includes = [den.policies.host-impermanence-for-users];
+    provides.to-users = {includes = [den.aspects.impermanence];};
     nixos = {persist, ...}: let
       directories = collect-attrs ["directories"] persist;
       files = collect-attrs ["files"] persist;
