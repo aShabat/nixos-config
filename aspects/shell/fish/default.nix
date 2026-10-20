@@ -9,8 +9,8 @@
     shell = config.programs.fish.package;
   };
 
-  homeManager = {lib, ...}: {
-    home.file.".config/fish".source = lib.mkOutOfStoreSymlink "/etc/nixos/aspects/shell/fish";
+  homeManager = {config, ...}: {
+    home.file.".config/fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/shell/fish";
   };
 
   persist.home.files = [".local/share/fish/fish_history"];
