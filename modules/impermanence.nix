@@ -4,7 +4,6 @@
   lib,
   ...
 }: let
-  inherit (den.lib) policy;
   root = "/dev/disk/by-label/nixos";
   root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root))) + ".device";
   collect-attrs = path: persist: lib.concatMap (p: lib.attrByPath path [] p) persist;
