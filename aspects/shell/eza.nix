@@ -4,7 +4,6 @@
       enable = true;
       colors = "always";
       git = true;
-      enableFishIntegration = true;
     };
   };
 }
