@@ -1,8 +1,10 @@
 {
-  services.logind = {
-    enable = true;
-    settings.Login = {
-      HandleLidSwitch = "ignore";
+  nixos = {
+    services.logind = {
+      enable = true;
+      settings.Login = {
+        HandleLidSwitch = "ignore";
+      };
     };
   };
 }
