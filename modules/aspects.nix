@@ -32,12 +32,13 @@
 
   generateAspectUtils = {
     attrPath,
-    children,
+    children ? [],
     ...
   }: {
     includes-all-subaspects = den: lib.map (name: lib.getAttrFromPath (attrPath ++ [name]) den) (lib.map (c: c.name) children);
     includes-all-subaspects-except = exclude: den:
       lib.map (name: lib.getAttrFromPath (attrPath ++ [name]) den) (lib.subtractLists exclude (lib.map (c: c.name) children));
+    self = den: lib.getAttrFromPath attrPath den;
   };
 
   importWithArgs = args: config: {path, ...} @ aspectNode: let
