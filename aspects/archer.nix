@@ -1,6 +1,5 @@
 {den, ...}: {
   includes = with den.aspects; [
-    ssh.netbird
   ];
 
   nixos = {
