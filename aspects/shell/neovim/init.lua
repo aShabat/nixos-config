@@ -1,0 +1,1 @@
+-- nixpkgs:git;ripgrep;curl
