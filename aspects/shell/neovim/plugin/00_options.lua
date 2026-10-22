@@ -2,7 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.keymap.set('n', ',', '<NOP>')
 
-vim.opt.number = true
+vim.opt.number = false
 vim.opt.numberwidth = 1
 vim.opt.relativenumber = true
 
