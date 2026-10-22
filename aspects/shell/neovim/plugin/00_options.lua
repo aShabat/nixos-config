@@ -2,10 +2,6 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.keymap.set('n', ',', '<NOP>')
 
-vim.opt.number = false
-vim.opt.numberwidth = 1
-vim.opt.relativenumber = true
-
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
