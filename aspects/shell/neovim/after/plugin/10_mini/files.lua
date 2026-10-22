@@ -13,6 +13,7 @@ H["toggle-show"] = function()
 	H["show-all"] = not H["show-all"]
 	return MiniFiles.refresh(MiniFiles.config)
 end
+-- nixpkgs:fd
 H["filter-fd"] = function(fs_entry)
 	local process = vim.system({ "fd", "-q", "-g", filename(fs_entry.path), "-C", basename(fs_entry.path) })
 	local status = process:wait(1000).code
