@@ -1,14 +1,13 @@
--- [nfnl] after/plugin/10_mini/files.fnl
-local _local_1_ = require("nfnl.string")
-local split = _local_1_.split
-local _local_2_ = require("nfnl.core")
-local map = _local_2_.map
-local _local_3_ = require("nfnl.fs")
-local basename = _local_3_.basename
-local filename = _local_3_.filename
 vim.pack.add({{src = "https://github.com/nvim-mini/mini.nvim"}})
-local group = vim.api.nvim_create_augroup("user-minifiles", {})
 local H = {}
+local group = vim.api.nvim_create_augroup("user-minifiles", {})
+
+local function basename(path)
+    return vim.fn.fnamemodify(path, ":h")
+end
+local function filename(path)
+    return vim.fn.fnamemodify(path, ":t")
+end
 H["show-all"] = false
 H["toggle-show"] = function()
   H["show-all"] = not H["show-all"]
@@ -29,18 +28,15 @@ H.filter = function(fs_entry)
     return H["filter-fd"](fs_entry)
   end
 end
-local function _5_(args)
+
+vim.api.nvim_create_autocmd("User", {pattern = "MiniFilesBufferCreate", group = group, callback = function (args)
   vim.keymap.set("n", "g.", H["toggle-show"], {buffer = args.data.buf_id})
   return print("test")
-end
-vim.api.nvim_create_autocmd("User", {pattern = "MiniFilesBufferCreate", group = group, callback = _5_})
-do
-  local MiniFiles = require("mini.files")
-  MiniFiles.setup({options = {use_as_default_explorer = true}, content = {filter = H.filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
-end
-do
-  local file_explorer
-  local function _6_()
+end})
+
+require"mini.files".setup({options = {use_as_default_explorer = true}, content = {filter = H.filter}, windows = {width_preview = 100}, mappings = {go_in = "L", go_in_plus = "l"}})
+
+vim.keymap.set("n", "<leader>e", function ()
     local path = vim.api.nvim_buf_get_name(0)
     local path0 = vim.fs.normalize(path)
     local path1
@@ -56,8 +52,4 @@ do
     end
     MiniFiles.open(path1, false)
     return MiniFiles.trim_right()
-  end
-  file_explorer = _6_
-  vim.keymap.set("n", "<leader>e", file_explorer)
-end
-return {}
+end)

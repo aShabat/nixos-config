@@ -1,2 +1,0 @@
--- [nfnl] init.fnl
-return {}
