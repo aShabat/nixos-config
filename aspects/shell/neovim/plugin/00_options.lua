@@ -1,6 +1,6 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = ","
-vim.keymap.set("n", ",", "<NOP>")
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+vim.keymap.set('n', ',', '<NOP>')
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -22,7 +22,7 @@ vim.opt.wrap = true
 
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
-vim.opt.inccommand = "split"
+vim.opt.inccommand = 'split'
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
@@ -35,7 +35,7 @@ vim.opt.backup = false
 
 vim.opt.termguicolors = true
 
-vim.opt.signcolumn = "auto:9"
+vim.opt.signcolumn = 'auto:9'
 
 vim.opt.cursorline = true
-vim.opt.colorcolumn = "100"
+vim.opt.colorcolumn = '100'
