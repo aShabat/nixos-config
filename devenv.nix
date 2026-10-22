@@ -5,4 +5,5 @@
   inputs,
   ...
 }: {
+  packages = with pkgs; [alejandra stylua];
 }
