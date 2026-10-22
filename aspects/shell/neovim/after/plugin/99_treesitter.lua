@@ -7,7 +7,7 @@ local nvim_treesitter = require 'nvim-treesitter'
 
 nvim_treesitter.install({ 'nix', 'lua', 'fennel', 'c', 'vim', 'vimdoc', 'query' }, {})
 
-local group = vim.api.nvim_create_augroup('treesitter', {})
+local group = vim.api.nvim_create_augroup('user.treesitter', { clear = true })
 
 local filetypes = {}
 for _, language in ipairs(nvim_treesitter.get_installed()) do

@@ -1,6 +1,6 @@
 vim.pack.add { { src = 'https://github.com/nvim-mini/mini.nvim' } }
 local H = {}
-local group = vim.api.nvim_create_augroup('user-minifiles', {})
+local group = vim.api.nvim_create_augroup('user.minifiles', { clear = true })
 
 local function basename(path) return vim.fn.fnamemodify(path, ':h') end
 local function filename(path) return vim.fn.fnamemodify(path, ':t') end

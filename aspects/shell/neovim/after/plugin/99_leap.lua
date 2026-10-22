@@ -1,6 +1,5 @@
 vim.pack.add { { src = 'https://codeberg.org/andyg/leap.nvim' } }
 local leap = require 'leap'
-local group = vim.api.nvim_create_augroup('user-leap', {})
 
 leap.opts.safe_labels = 'fnut/SFNLHMUGTZ?'
 
