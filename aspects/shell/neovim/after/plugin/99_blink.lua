@@ -10,6 +10,14 @@ cmp.setup {
     trigger = { show_on_backspace = true },
     accept = { auto_brackets = { enabled = false } },
     documentation = { auto_show = true },
+    keymap = {
+      preset = 'default',
+      ['<Tab>'] = false,
+      ['<S-Tab>'] = false,
+
+      ['<C-l>'] = { 'snippet-forward' },
+      ['<C-k>'] = { 'snippet-backward' },
+    },
   },
   sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
 }
