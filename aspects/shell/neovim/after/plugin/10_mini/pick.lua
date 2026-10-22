@@ -1,6 +1,6 @@
-vim.pack.add({{src = "https://github.com/nvim-mini/mini.nvim"}})
+vim.pack.add({ { src = "https://github.com/nvim-mini/mini.nvim" } })
 
-require"mini.pick".setup({window = {relative = "editor", row = 0, col = 0}, options = {use_cache = true}})
+require("mini.pick").setup({ window = { relative = "editor", row = 0, col = 0 }, options = { use_cache = true } })
 
 vim.ui.select = MiniPick.ui_select
 vim.keymap.set("n", "<Leader>ff", MiniPick.registry.files)
