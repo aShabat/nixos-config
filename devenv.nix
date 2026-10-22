@@ -5,5 +5,5 @@
   inputs,
   ...
 }: {
-  packages = with pkgs; [alejandra stylua lua-language-server];
+  packages = with pkgs; [alejandra stylua lua-language-server fish-lsp];
 }
