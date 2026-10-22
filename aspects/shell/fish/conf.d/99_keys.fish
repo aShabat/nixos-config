@@ -1,0 +1,1 @@
+set -gx fish_key_bindings fish_custom_key_bindings
