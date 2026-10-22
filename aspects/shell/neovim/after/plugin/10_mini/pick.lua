@@ -10,3 +10,35 @@ vim.keymap.set('n', '<Leader>ff', MiniPick.registry.files)
 vim.keymap.set('n', '<Leader>fh', MiniPick.registry.help)
 vim.keymap.set('n', '<Leader>fb', MiniPick.registry.buffers)
 vim.keymap.set('n', '<Leader>fg', MiniPick.registry.grep_live)
+
+vim.keymap.set('n', 'gd', function() MiniExtra.pickers.lsp({ scope = 'definition' }, {}) end)
+vim.keymap.set('n', 'gD', function() MiniExtra.pickers.lsp({ scope = 'declaration' }, {}) end)
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(ev)
+    vim.keymap.set(
+      'n',
+      '<LocalLeader>gr',
+      function() MiniExtra.pickers.lsp({ scope = 'references' }, {}) end,
+      { buf = ev.buf }
+    )
+    vim.keymap.set(
+      'n',
+      '<LocalLeader>gt',
+      function() MiniExtra.pickers.lsp({ scope = 'type_definition' }, {}) end,
+      { buf = ev.buf }
+    )
+    vim.keymap.set(
+      'n',
+      '<LocalLeader>ds',
+      function() Miniextra.pickers.lsp({ scope = 'document_symbol' }, {}) end,
+      { buf = ev.buf }
+    )
+    vim.keymap.set(
+      'n',
+      '<LocalLeader>ws',
+      function() MiniExtra.pickers.lsp({ scope = 'workspace_symbol_live' }, {}) end,
+      { buf = ev.buf }
+    )
+  end,
+})
