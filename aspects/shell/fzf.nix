@@ -1,8 +1,12 @@
 {
-  homeManager = {pkgs, ...}: {
+  homeManager = {
+    pkgs,
+    lib,
+    ...
+  }: {
+    home.packages = [pkgs.fd];
     programs.fzf = {
       enable = true;
-      defaultCommand = "${pkgs.fd/bin/fd} --type f";
     };
   };
 }
