@@ -5,5 +5,5 @@
   inputs,
   ...
 }: {
-  packages = with pkgs; [alejandra stylua];
+  packages = with pkgs; [alejandra stylua lua-language-server];
 }
