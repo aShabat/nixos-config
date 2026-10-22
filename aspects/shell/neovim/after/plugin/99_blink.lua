@@ -8,7 +8,6 @@ cmp.setup {
   completion = {
     keyword = { range = 'full' },
     trigger = { show_on_backspace = true },
-    accept = { auto_brackets = { enabled = false } },
     documentation = { auto_show = true },
   },
   keymap = {
@@ -18,6 +17,12 @@ cmp.setup {
 
     ['<C-l>'] = { 'snippet_forward' },
     ['<C-k>'] = { 'snippet_backward' },
+  },
+  signature = {
+    enabled = true,
+    trigger = {
+      enabled = true,
+    },
   },
   sources = { default = { 'lsp', 'path', 'snippets', 'buffer' } },
 }
