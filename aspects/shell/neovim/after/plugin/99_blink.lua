@@ -4,7 +4,7 @@ local cmp = require 'blink.cmp'
 cmp.build():pwait()
 
 cmp.setup {
-  cmdline = {},
+  cmdline = { completion = { menu = { auto_show = true } }, keymap = { preset = 'default' } },
   completion = {
     keyword = { range = 'full' },
     trigger = { show_on_backspace = true },
