@@ -1,7 +1,10 @@
-{den, ...}: {
+{
+  den,
+  aspect-utils,
+  ...
+}: {
+  includes = with den.aspects; [keyring aspect-utils.self.noctalia];
   nixos = {config, ...}: {
-    includes = with den.aspects; [keyring];
-
     programs.niri = {
       enable = true;
     };
@@ -15,5 +18,11 @@
       };
     };
     systemd.user.services.niri.enableDefaultPath = false;
+
+    provides.to-users = [aspect-utils.self];
+  };
+
+  homeManager = {config, ...}: {
+    home.file.".config/niri" = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/niri";
   };
 }
