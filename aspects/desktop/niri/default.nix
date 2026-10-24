@@ -4,20 +4,11 @@
   ...
 }: {
   includes = with den.aspects; [keyring];
-  nixos = {config, ...}: {
+  nixos = {
     programs.niri = {
       enable = true;
     };
 
-    services.greetd = {
-      enable = true;
-      settings = {
-        default_session = {
-          command = "${config.programs.niri.package}/bin/niri-session";
-          user = "anton";
-        };
-      };
-    };
     systemd.user.services.niri.enableDefaultPath = false;
   };
 
