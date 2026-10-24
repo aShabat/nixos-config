@@ -18,11 +18,10 @@
       };
     };
     systemd.user.services.niri.enableDefaultPath = false;
-
-    provides.to-users = [aspect-utils.self];
   };
+  provides.to-users.includes = [aspect-utils.self];
 
   homeManager = {config, ...}: {
-    home.file.".config/niri" = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/niri";
+    home.file.".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/niri";
   };
 }
