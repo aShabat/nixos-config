@@ -1,5 +1,5 @@
 let
-  set_soft_fish_var = name: value: "if not set -q ${name}; set -gx ${name} ${value}";
+  set_soft_fish_var = name: value: "if not set -q ${name}; set -gx ${name} ${value}; end";
 in {
   nixos = {
     lib,
