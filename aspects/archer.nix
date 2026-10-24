@@ -1,5 +1,6 @@
 {den, ...}: {
   includes = with den.aspects; [
+    desktop
   ];
 
   nixos = {
