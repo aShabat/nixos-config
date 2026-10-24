@@ -1,14 +1,14 @@
 {
-  den,
   inputs,
   lib,
+  aspect-utils,
   ...
 }: let
   root = "/dev/disk/by-label/nixos";
   root-device = lib.concatStringsSep "-" (lib.tail (map (lib.replaceString "-" "\\x2d") (lib.splitString "/" root))) + ".device";
   collect-attrs = path: persist: lib.concatMap (p: lib.attrByPath path [] p) persist;
 in {
-  provides.to-users = {includes = [den.aspects.impermanence];};
+  provides.to-users.includes = with aspect-utils; [self self.diff];
   nixos = {persist, ...}: let
     directories = collect-attrs ["directories"] persist;
     files = collect-attrs ["files"] persist;
