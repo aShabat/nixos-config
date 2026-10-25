@@ -35,7 +35,6 @@ in {
 
     boot.initrd = {
       supportedFilesystems = ["btrfs"];
-      systemd.enable = true;
       systemd.services.restore-root = {
         description = "Rollback btrfs root";
         wantedBy = ["initrd.target"];
