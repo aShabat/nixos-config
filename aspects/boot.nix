@@ -36,7 +36,7 @@
       };
 
       user_menu = {
-        enabled = true;
+        enabled = false;
         min_uid = 1000;
         max_uid = 2000;
       };
