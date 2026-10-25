@@ -20,6 +20,11 @@
       };
     };
 
+    console = {
+      font = "spleen-12x24";
+      packages = [pkgs.spleen];
+    };
+
     environment.etc."tuigreet/config.toml".source = toml.generate "config.toml" {
       session.sessions_dirs = [
         "/run/current-system/sw/share/wayland-sessions"
