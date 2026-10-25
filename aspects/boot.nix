@@ -7,7 +7,7 @@
         systemd-boot.enable = true;
         efi.canTouchEfiVariables = true;
       };
-      kernelParams = ["quiet" "slpash"];
+      kernelParams = ["quiet" "splash"];
     };
 
     services.greetd = {
