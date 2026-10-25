@@ -2,8 +2,13 @@
   nixos = {pkgs, ...}: let
     toml = pkgs.formats.toml {};
   in {
-    boot.loader.systemd-boot.enable = true;
-    boot.loader.efi.canTouchEfiVariables = true;
+    boot = {
+      loader = {
+        systemd-boot.enable = true;
+        efi.canTouchEfiVariables = true;
+      };
+      kernelParams = ["quiet" "slpash"];
+    };
 
     services.greetd = {
       enable = true;
