@@ -58,6 +58,11 @@ require('mini.statusline').setup {
 
 require('mini.trailspace').setup()
 
+vim.api.nvim_create_user_command('MiniTrailSpace', function()
+  MiniTrailspace.trim()
+  MiniTrailspace.trim_last_lines()
+end, {})
+
 require('mini.notify').setup()
 vim.notify = MiniNotify.make_notify {}
 vim.api.nvim_create_user_command('MNHistory', function()
