@@ -11,11 +11,10 @@ vim.keymap.set('n', '<Leader>fh', MiniPick.registry.help)
 vim.keymap.set('n', '<Leader>fb', MiniPick.registry.buffers)
 vim.keymap.set('n', '<Leader>fg', MiniPick.registry.grep_live)
 
-vim.keymap.set('n', 'gd', function() MiniExtra.pickers.lsp({ scope = 'definition' }, {}) end)
-vim.keymap.set('n', 'gD', function() MiniExtra.pickers.lsp({ scope = 'declaration' }, {}) end)
-
 vim.api.nvim_create_autocmd('LspAttach', {
   callback = function(ev)
+    vim.keymap.set('n', 'gd', function() MiniExtra.pickers.lsp({ scope = 'definition' }, {}) end)
+    vim.keymap.set('n', 'gD', function() MiniExtra.pickers.lsp({ scope = 'declaration' }, {}) end)
     vim.keymap.set(
       'n',
       '<LocalLeader>gr',

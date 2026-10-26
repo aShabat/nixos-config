@@ -12,6 +12,10 @@
       "rev": "619363c30309d29ffa631e67c8183f2a72caa373",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "fastaction.nvim": {
+      "rev": "3f0b6de0853fe47ba47339056332c431134155b9",
+      "src": "https://github.com/chaitanyabsprip/fastaction.nvim"
+    },
     "leap.nvim": {
       "rev": "0d0549b13428855c063468a6935c18e933599a18",
       "src": "https://codeberg.org/andyg/leap.nvim"
