@@ -1,4 +1,4 @@
-{
+{aspect-utils, ...}: {
   homeManager = {
     config,
     lib,
@@ -11,4 +11,8 @@
     home.file.".config/tmux".source =
       config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/shell/tmux";
   };
+
+  nixos.environment.enableAllTerminfo = true;
+
+  provides.to-hosts.includes = [aspect-utils.self];
 }
