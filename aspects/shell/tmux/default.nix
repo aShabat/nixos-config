@@ -1,6 +1,6 @@
 {
-  homeManager = {lib, ...}: {
+  homeManager = {
     programs.tmux.enable = true;
-    xdg.configFile."tmux/tmux.conf".enable = lib.mkForce false;
+    xdg.configFile."tmux/tmux.conf".enable = false;
   };
 }

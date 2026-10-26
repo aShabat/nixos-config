@@ -10,7 +10,7 @@ in {
       enable = true;
     };
 
-    environment.etc."fish/config.fish".enable = lib.mkForce false;
+    environment.etc."fish/config.fish".enable = false;
     environment.etc."fish/conf.d/nixos-env.fish".text =
       lib.concatMapAttrsStringSep "\n"
       set_soft_fish_var
@@ -29,7 +29,7 @@ in {
     programs.fish.enable = true;
     home.shell.enableFishIntegration = false;
 
-    xdg.configFile."fish/config.fish".enable = lib.mkForce false;
+    xdg.configFile."fish/config.fish".enable = false;
     home.file.".config/fish".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/shell/fish";
     home.file.".local/share/fish/vendor_conf.d/hm-env.fish".text = lib.concatMapAttrsStringSep "\n" set_soft_fish_var config.home.sessionVariables;
   };
