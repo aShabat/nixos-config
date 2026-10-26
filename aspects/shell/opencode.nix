@@ -9,6 +9,7 @@
   persist.home.directories = [
     ".config/opencode"
     ".local/share/opencode"
+    ".local/share/opentui"
     ".local/state/opencode"
   ];
 }
