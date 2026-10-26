@@ -30,6 +30,21 @@
       }
     else null;
 
+  dropEmptyAspects = {
+    path,
+    children ? [],
+    ...
+  } @ aspectNode:
+    if isNixFile path
+    then aspectNode
+    else let
+      processedChildren = lib.filter (c: !(isNull c)) (lib.map dropEmptyAspects children);
+      hasDefault = lib.pathExists (path + "/default.nix");
+    in
+      if hasDefault || (lib.length processedChildren) > 0
+      then aspectNode // {children = processedChildren;}
+      else null;
+
   generateAspectUtils = {den, ...}: {
     attrPath,
     children ? [],
@@ -99,7 +114,7 @@
     )
     ++ lib.concatMap generateAspectImports children;
 
-  aspect-tree-imports = path: generateAspectImports (scanAspectTree [] path);
+  aspect-tree-imports = path: generateAspectImports (dropEmptyAspects (scanAspectTree [] path));
 in {
   imports = aspect-tree-imports ../aspects;
 }
