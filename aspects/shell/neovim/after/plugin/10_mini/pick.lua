@@ -31,7 +31,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     vim.keymap.set(
       'n',
       '<LocalLeader>ds',
-      function() Miniextra.pickers.lsp({ scope = 'document_symbol' }, {}) end,
+      function() MiniExtra.pickers.lsp({ scope = 'document_symbol' }, {}) end,
       { buf = ev.buf }
     )
     vim.keymap.set(
