@@ -4,6 +4,7 @@
   nixos = {
     services.radarr = {
       enable = true;
+      group = "media";
     };
 
     users.users.radarr.extraGroups = ["media"];

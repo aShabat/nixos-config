@@ -4,6 +4,7 @@
   nixos = {
     services.bazarr = {
       enable = true;
+      group = "media";
     };
 
     users.users.bazarr.extraGroups = ["media"];

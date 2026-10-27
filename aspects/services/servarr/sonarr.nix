@@ -4,6 +4,7 @@
   nixos = {
     services.sonarr = {
       enable = true;
+      group = "media";
     };
 
     users.users.sonarr.extraGroups = ["media"];
