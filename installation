@@ -1,0 +1,107 @@
+```sh
+# live: tools
+nix shell nixpkgs#git nixpkgs#git-crypt nixpkgs#gnupg nixpkgs#pinentry-curses
+```
+
+```sh
+# live: mount
+mount -o subvol=root,compress=zstd,noatime /dev/disk/by-label/nixos /mnt
+mkdir -p /mnt/nix /mnt/persistent /mnt/boot
+mount -o subvol=nix,compress=zstd,noatime /dev/disk/by-label/nixos /mnt/nix
+mount -o subvol=persistent,compress=zstd,noatime /dev/disk/by-label/nixos /mnt/persistent
+mount /dev/disk/by-uuid/$ESP_UUID /mnt/boot
+```
+
+```sh
+# live: clone
+mkdir -p /mnt/persistent/etc
+git clone "$REPO_URL" /mnt/persistent/etc/nixos
+cd /mnt/persistent/etc/nixos
+```
+
+```sh
+# live: gpg
+export GNUPGHOME=/mnt/persistent/home/anton/.gnupg
+mkdir -p "$GNUPGHOME"
+chmod 700 "$GNUPGHOME"
+export GPG_TTY=$(tty)
+gpg --full-generate-key
+FPR=$(gpg --list-secret-keys --with-colons | awk -F: '/^fpr:/ {print $10; exit}')
+gpg --armor --export "$FPR" > "/tmp/$hostname.asc"
+```
+
+```sh
+# live: authorize archer
+mkdir -p /home/nixos/.ssh
+cat /mnt/persistent/etc/nixos/aspects/ssh/*.pub >> /home/nixos/.ssh/authorized_keys
+chmod 700 /home/nixos/.ssh
+chmod 600 /home/nixos/.ssh/authorized_keys
+ip -4 addr show scope global
+```
+
+```sh
+# archer: pull pubkey
+scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
+  "nixos@<iso-ip>:/tmp/$hostname.asc" /tmp/
+```
+
+```sh
+# archer: import + authorize
+gpg --import "/tmp/$hostname.asc"
+FPR=<fingerprint>
+cd /etc/nixos
+git-crypt add-gpg-user --trusted "$FPR"
+git add .git-crypt/keys/default/0/"$FPR".gpg
+git commit -m "git-crypt: add $hostname" -- .git-crypt/keys/default/0/"$FPR".gpg
+git push
+```
+
+```sh
+# live: unlock
+export GNUPGHOME=/mnt/persistent/home/anton/.gnupg
+cd /mnt/persistent/etc/nixos
+git pull --rebase
+git-crypt unlock
+test "$(head -c 1 aspects/user-password/anton.secret)" = '$'
+```
+
+```sh
+# live: hardware
+nixos-generate-config --root /mnt --show-hardware-config > "/tmp/$hostname-hardware.nix"
+nvim "aspects/$hostname.nix"
+```
+
+```sh
+# live: install
+nixos-install --root /mnt --no-root-passwd --flake "/mnt/persistent/etc/nixos#$hostname"
+```
+
+```sh
+# live: reboot
+umount -R /mnt
+reboot
+```
+
+```sh
+# installed: chown
+run0 chown -R anton:users /etc/nixos /home/anton/.gnupg
+gpgconf --kill gpg-agent
+rm -f ~/.gnupg/S.gpg-agent*
+```
+
+```sh
+# installed: verify
+gpg --list-secret-keys
+git -C /etc/nixos status
+git-crypt status
+nh os switch
+systemctl --failed
+```
+
+```sh
+# installed: commit
+cd /etc/nixos
+git add "aspects/$hostname.nix"
+git commit -m "$hostname: hardware"
+git push
+```
