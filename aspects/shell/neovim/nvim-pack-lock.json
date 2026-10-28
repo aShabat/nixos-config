@@ -20,6 +20,10 @@
       "rev": "0d0549b13428855c063468a6935c18e933599a18",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
+    "markview.nvim": {
+      "rev": "ecc5a8867daa1856f8bcc5fdbceca8f5a5ce5f5d",
+      "src": "https://github.com/OXY2DEV/markview.nvim"
+    },
     "mini.nvim": {
       "rev": "629bf6792187e11b4829411c1648f86f28df3963",
       "src": "https://github.com/nvim-mini/mini.nvim"
