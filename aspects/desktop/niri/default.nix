@@ -23,5 +23,7 @@
     home.file.".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/niri/noctalia/";
   };
 
+  persist.home.directories = [".local/state/noctalia"];
+
   provides.to-users.includes = [aspect-utils.self];
 }
