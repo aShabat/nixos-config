@@ -3,7 +3,7 @@
   homeManager = {
     programs = {
       firefox.enable = true;
-      alacritty.enable = true;
+      ghostty.enable = true;
     };
   };
 
