@@ -1,7 +1,7 @@
 {den, ...}: {
   den.schema.host = {
     includes = with den.aspects; [
-      network-manager
+      networking
       impermanence
       ssh
       ssh.netbird
