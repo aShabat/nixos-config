@@ -1,14 +1,3 @@
-# Warden migration TODO
-
-New host `warden` (AMD desktop), Niri + Noctalia, dev toolchains via devenv.
-`archer` and `hierophant` stay unchanged.
-
-## Decisions
-
-- Desktop: Niri + Noctalia (no Plasma, no SDDM; keep greetd/tuigreet).
-- Global packages: GUI apps + daily CLI only. Toolchains belong in per-project devenv.
-- Hebrew keyboard layout: optional, one line in niri config.
-
 ## Phase 0 — bootstrap
 
 - [ ] Back up Arch `$HOME` and the git-crypt key (eval fails without it: `github-token.secret`, `anton.secret`).
@@ -20,15 +9,9 @@ New host `warden` (AMD desktop), Niri + Noctalia, dev toolchains via devenv.
 - [ ] Note: `initialPassword` is plaintext in `/nix/store` and git; use a throwaway, or `initialHashedPassword` if preferred.
 - [ ] Note: `ssh` sets `AllowUsers` to the primary user only, so `anton-tmp` has no SSH access unless added explicitly.
 
-## Phase 1 — host registration
-
-- [ ] `modules/hosts.nix`: `den.hosts.x86_64-linux.warden.users.anton = {};`
-- [ ] `aspects/warden.nix`: `includes = [den.aspects.desktop den.aspects.steam]`; AMD microcode, `kvm-amd`, `initrd.availableKernelModules`, fileSystems, `hardware.enableRedistributableFirmware`.
-
 ## Phase 2 — desktop plumbing (new aspects)
 
 - [ ] `desktop/audio.nix`: pipewire (alsa, 32-bit, pulse), `security.rtkit`, easyeffects (RNNoise; `noise-suppression-for-voice` is gone from nixpkgs).
-- [ ] `desktop/bluetooth.nix`: `hardware.bluetooth`, powerOnBoot, persist `/var/lib/bluetooth`.
 - [ ] `desktop/fonts.nix`: `fonts.fontDir.enable` (Steam/Electron), noto + CJK + emoji, nerd-fonts, adwaita, liberation, unifont, victor-mono; fontconfig defaults.
 - [ ] `desktop/portals.nix`: `xdg.portal.enable`, `xdgOpenUsePortal`, gtk + gnome portals (test screen sharing before choosing).
 - [ ] `desktop/polkit.nix`: `security.polkit.enable` + spawn agent from niri.
