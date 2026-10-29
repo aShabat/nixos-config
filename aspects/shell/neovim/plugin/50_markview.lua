@@ -15,4 +15,8 @@ require('nvim-treesitter').install {
   'comment',
 }
 
-require('markview').setup {}
+require('markview').setup {
+  preview = {
+    icon_provider = 'mini',
+  },
+}
