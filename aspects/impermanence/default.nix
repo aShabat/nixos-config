@@ -29,6 +29,7 @@ in {
         ++ directories;
       files =
         [
+          "/etc/machine-id"
         ]
         ++ files;
     };
