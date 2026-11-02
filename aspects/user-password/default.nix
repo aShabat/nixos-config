@@ -1,5 +1,9 @@
 {lib, ...}: {
   user = {user, ...}: {
-    hashedPasswordFile = lib.toString (./. + "/${user.userName}.secret");
+    hashedPassword = lib.trim (lib.fileContents (./. + "/${user.userName}.secret"));
+  };
+
+  nixos = {
+    users.mutableUsers = false;
   };
 }
