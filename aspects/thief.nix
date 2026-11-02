@@ -1,6 +1,6 @@
 {den, ...}: {
   includes = with den.aspects; [
-    sevices.openvpn
+    services.openvpn
   ];
 
   nixos = {
