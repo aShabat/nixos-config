@@ -41,4 +41,6 @@
       externalInterface = "enp0s6";
     };
   };
+
+  persist.directories = ["/var/lib/openvpn"];
 }

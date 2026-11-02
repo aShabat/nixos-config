@@ -1,0 +1,99 @@
+#!/usr/bin/env fish
+# Issue one OpenVPN client certificate and write NAME.ovpn.
+#
+# Requires easyrsa in PATH (nix shell nixpkgs#easyrsa, or a devenv script with
+# packages = [ pkgs.easyrsa pkgs.util-linux ]).
+#
+# Fixed layout:
+#   /var/lib/openvpn/pki/      easy-rsa working dir (pki/ state + ta.key)
+#   /var/lib/openvpn/clients/  generated NAME.ovpn files
+
+set -g BASE /var/lib/openvpn
+set -g PKI_DIR $BASE/pki
+set -g OUT_DIR $BASE/clients
+set -g REMOTE 82.70.217.37
+set -g PORT 1194
+
+umask 077
+
+function die
+    echo "error: $argv" >&2
+    exit 1
+end
+
+function usage
+    echo "usage: ovpn-new-client NAME"
+    echo
+    echo "Create a client certificate and write NAME.ovpn with the profile inlined."
+    echo "Endpoint is fixed at $REMOTE:$PORT; output goes to $OUT_DIR."
+end
+
+argparse --name=ovpn-new-client h/help -- $argv
+or exit 1
+
+if set -q _flag_help
+    usage
+    exit 0
+end
+
+if test (count $argv) -ne 1
+    usage >&2
+    exit 1
+end
+
+set -l name $argv[1]
+string match -qr '^[A-Za-z0-9][A-Za-z0-9._-]*$' -- $name
+or die "invalid client name: $name"
+
+# Serialize issuance so concurrent runs cannot corrupt easy-rsa's index/serial.
+if not set -q _OVPN_NEW_CLIENT_LOCKED
+    set -gx _OVPN_NEW_CLIENT_LOCKED 1
+    exec flock $BASE/.genlock (status fish-path) (status filename) $name
+end
+
+test -e $PKI_DIR/pki/issued/$name.crt
+and die "client '$name' already exists (revoke it first)"
+test -e $OUT_DIR/$name.ovpn
+and die "$OUT_DIR/$name.ovpn already exists"
+
+cd $PKI_DIR
+
+set -l log (mktemp)
+if not easyrsa --batch build-client-full $name nopass >$log 2>&1
+    cat $log >&2
+    rm -f $log
+    die "easyrsa failed to issue '$name'"
+end
+rm -f $log
+
+set -l out $OUT_DIR/$name.ovpn
+begin
+    printf '%s\n' \
+        client \
+        'dev tun' \
+        'proto udp' \
+        "remote $REMOTE $PORT" \
+        'resolv-retry infinite' \
+        nobind \
+        persist-key \
+        persist-tun \
+        'remote-cert-tls server' \
+        auth-nocache \
+        'ignore-unknown-option block-outside-dns' \
+        'verb 3'
+    printf '<ca>\n'
+    cat $PKI_DIR/pki/ca.crt
+    printf '</ca>\n'
+    printf '<cert>\n'
+    cat $PKI_DIR/pki/issued/$name.crt
+    printf '</cert>\n'
+    printf '<key>\n'
+    cat $PKI_DIR/pki/private/$name.key
+    printf '</key>\n'
+    printf '<tls-crypt>\n'
+    cat $PKI_DIR/ta.key
+    printf '</tls-crypt>\n'
+end >$out
+
+chmod 600 $out
+echo "wrote $out"
