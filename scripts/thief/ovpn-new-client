@@ -1,4 +1,5 @@
 #!/usr/bin/env fish
+# fish;easyrsa;util-linux
 # Issue one OpenVPN client certificate and write NAME.ovpn.
 #
 # Requires easyrsa in PATH (nix shell nixpkgs#easyrsa, or a devenv script with
