@@ -17,6 +17,7 @@
 
         server 10.8.0.0 255.255.255.0
         max-clients 16
+        client-to-client
 
         push "redirect-gateway def1 bypass-dhcp"
         push "dhcp-option DNS 1.1.1.1"
