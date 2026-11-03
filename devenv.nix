@@ -23,7 +23,7 @@
     if lib.pathExists (./scripts + "/${dirname}")
     then
       lib.mapAttrs (name: _: wrap-script (./scripts + "/${dirname}/${name}"))
-      (lib.filterAttrs (_: kind: kind == "file") (lib.readDir (./scripts + "/${dirname}")))
+      (lib.filterAttrs (_: kind: kind == "regular") (lib.readDir (./scripts + "/${dirname}")))
     else {};
 
   host-scripts = scripts-from-dir hostname;
