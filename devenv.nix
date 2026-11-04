@@ -29,7 +29,13 @@
   host-scripts = scripts-from-dir hostname;
   common-scripts = scripts-from-dir "common";
 in {
-  packages = with pkgs; [alejandra stylua lua-language-server fish-lsp];
+  packages = with pkgs; [
+    alejandra
+    stylua
+    lua-language-server
+    fish-lsp
+    deploy-rs
+  ];
 
   scripts = common-scripts // host-scripts;
 }
