@@ -5,6 +5,7 @@
       run0 = {
         enable = true;
         sudo-shim.enable = true;
+        wheelNeedsPassword = false;
         persistentAuth = {
           enable = true;
           enableRemote = true;
