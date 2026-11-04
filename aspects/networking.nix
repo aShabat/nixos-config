@@ -5,7 +5,10 @@
     networking.networkmanager = {
       enable = true;
       plugins = with pkgs; [networkmanager-openvpn];
+      dns = "systemd-resolved";
     };
+
+    services.resolved.enable = true;
 
     hardware.bluetooth = {
       enable = true;
