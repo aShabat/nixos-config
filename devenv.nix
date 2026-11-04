@@ -34,7 +34,6 @@ in {
     stylua
     lua-language-server
     fish-lsp
-    deploy-rs
   ];
 
   scripts = common-scripts // host-scripts;

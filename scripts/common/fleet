@@ -1,0 +1,8 @@
+#!/usr/bin/env fish
+# fish;deploy-rs
+
+if set -q argv[1]
+  deploy $argv
+else
+  deploy --groups (string trim < /etc/hostname) /etc/nixos
+end

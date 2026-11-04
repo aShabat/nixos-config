@@ -6,12 +6,14 @@
   ...
 }: let
   inherit (inputs) deploy-rs nixpkgs;
+  targets = lib.attrNames (lib.concatMapAttrs (_: hosts: hosts) config.den.hosts);
   mkNode = system: host: let
     drv = deploy-rs.lib.${system};
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     hostname = host.hostName;
     profilesOrder = ["config-sync" "system"];
+    groups = lib.filter (target: target != host.hostName) targets;
 
     profiles.system = {
       user = "root";
