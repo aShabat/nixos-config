@@ -11,7 +11,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
   in {
     hostname = host.hostName;
-    profilesOrder = ["system" "config-sync"];
+    profilesOrder = ["config-sync" "system"];
 
     profiles.system = {
       user = "root";
