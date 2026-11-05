@@ -19,7 +19,7 @@
       };
     };
 
-    programs.ssh.knownHostsFiles = [./known_hosts];
+    programs.ssh.knownHostsFiles = [./known.hosts];
   };
 
   user = {
