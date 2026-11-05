@@ -18,6 +18,8 @@
         PerSourcePenalties = "crash:3600s authfail:3600s max:86400s";
       };
     };
+
+    programs.ssh.knownHostsFiles = [./known_hosts];
   };
 
   user = {
