@@ -17,6 +17,7 @@ cmp.setup {
     keyword = { range = 'full' },
     trigger = { show_on_backspace = true },
     documentation = { auto_show = true },
+    accept = { auto_brackets = { enabled = false } },
   },
   keymap = {
     preset = 'default',
