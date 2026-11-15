@@ -40,7 +40,15 @@ require('mini.statusline').setup {
       local fileinfo = msl.section_fileinfo { trunc_width = 120 }
       local location = msl.section_location { trunc_width = 75 }
       local search = msl.section_searchcount { trunc_width = 75 }
-      local showcmd = vim.api.nvim_eval_statusline('%S', {})[str]
+      local showcmd = vim.api.nvim_eval_statusline('%S', {}).str
+      local formatters = ''
+      for _, f in ipairs(require('conform').list_formatters_to_run()) do
+        if formatters == '' then
+          formatters = 'Conform:' .. f.name
+        else
+          formatters = formatters .. ':' .. f.name
+        end
+      end
       return msl.combine_groups {
         { hl = 'MiniStatuslineDevinfo', strings = { reg_recording0 } },
         { hl = mode_hl, strings = { mode } },
@@ -48,7 +56,7 @@ require('mini.statusline').setup {
         '%<',
         { hl = 'MiniStatuslineFilename', strings = { filename } },
         '%=',
-        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
+        { hl = 'MiniStatuslineFileinfo', strings = { fileinfo, formatters } },
         { hl = mode_hl, strings = { search, location } },
         { hl = 'MiniStatuslineDevinfo', strings = { showcmd } },
       }
