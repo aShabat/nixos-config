@@ -47,6 +47,10 @@
     "rainbow-delimiters.nvim": {
       "rev": "012f1480cd9a5fc99fce7678e0a536421a53fc46",
       "src": "https://github.com/hiphish/rainbow-delimiters.nvim"
+    },
+    "uiua.vim": {
+      "rev": "5071e4a22fd2952617ae995cd3fab737c77753ae",
+      "src": "https://github.com/Apeiros-46B/uiua.vim"
     }
   }
 }
