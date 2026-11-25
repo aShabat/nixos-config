@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "basalt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1795613273,
+        "narHash": "sha256-gG9V/5mWLWYeyDNPQonlWFE3y7GPBK+HWTfJZuzWP+U=",
+        "owner": "aShabat",
+        "repo": "basalt",
+        "rev": "f7b95c76dc3aa20c00bf614d60bb734379bb621a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "aShabat",
+        "ref": "main",
+        "repo": "basalt",
+        "type": "github"
+      }
+    },
     "den": {
       "locked": {
         "lastModified": 1792618207,
@@ -203,6 +220,7 @@
     },
     "root": {
       "inputs": {
+        "basalt": "basalt",
         "den": "den",
         "deploy-rs": "deploy-rs",
         "flake-parts": "flake-parts",
