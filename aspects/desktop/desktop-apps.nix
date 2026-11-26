@@ -1,10 +1,6 @@
-{
-  aspect-utils,
-  pkgs,
-  ...
-}: {
+{aspect-utils, ...}: {
   provides.to-users.includes = [aspect-utils.self];
-  homeManager = {
+  homeManager = {pkgs, ...}: {
     programs = {
       firefox = {
         enable = true;
