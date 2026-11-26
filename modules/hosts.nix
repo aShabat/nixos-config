@@ -1,7 +1,8 @@
 # defines all hosts + users + homes.
 # then config their aspects in as many files you want
 {
-  den.hosts.x86_64-linux.hierophant.users.anton = {};
+  den.hosts.x86_64-linux.warden.users.anton = {};
   den.hosts.x86_64-linux.archer.users.anton = {};
+  den.hosts.x86_64-linux.hierophant.users.anton = {};
   den.hosts.aarch64-linux.thief.users.anton = {};
 }
