@@ -13,13 +13,14 @@
   };
 
   homeManager = {
+    host,
     pkgs,
     config,
     ...
   }: {
-    home.file.".config/niri".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/niri/config";
+    home.file.".config/niri".source = config.lib.file.mkOutOfStoreSymlink ("/etc/nixos/aspects/desktop/niri/configs/" + host.hostName);
 
-    home.packages = [pkgs.noctalia];
+    home.packages = with pkgs; [noctalia xwayland-satellite];
     home.file.".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/niri/noctalia/";
   };
 

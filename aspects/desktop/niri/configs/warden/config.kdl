@@ -1,0 +1,12 @@
+include "../common/config.kdl"
+
+output "DP-3" {
+  mode "1920x1080@144.000"
+  position x=0 y=0
+}
+
+output "HDMI-A-1" {
+  mode "1920x1080@60.000"
+  transform "270"
+  position x=-1080 y=-420
+}
