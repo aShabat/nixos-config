@@ -19,8 +19,7 @@
     config,
     ...
   }: {
-    xdg.portal.enable = true;
-
+    xdg.portal.configPackages = [pkgs.niri];
     home.file.".config/niri".source = config.lib.file.mkOutOfStoreSymlink ("/etc/nixos/aspects/desktop/niri/configs/" + host.hostName);
 
     home.packages = with pkgs; [noctalia xwayland-satellite playerctl];
