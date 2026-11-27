@@ -33,6 +33,11 @@
     };
   };
 in {
+  flake-file.inputs.deploy-rs = {
+    url = "github:serokell/deploy-rs";
+    inputs.nixpkgs.follows = "nixpkgs";
+  };
+
   flake.deploy = {
     remoteBuild = true;
     nodes =

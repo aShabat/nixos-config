@@ -3,6 +3,11 @@
   inputs,
   ...
 }: {
+  flake-file.inputs.basalt = {
+    url = "github:aShabat/basalt/main";
+    flake = false;
+  };
+
   includes = [den.aspects.services.caddy];
 
   nixos = {
