@@ -10,5 +10,5 @@
     };
   };
 
-  persist.home.directories = [".config/mozilla/firefox"];
+  persist.home.directories = [".config/mozilla"];
 }
