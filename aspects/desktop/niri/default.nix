@@ -9,6 +9,7 @@
       enable = true;
     };
 
+    environment.pathsToLink = ["/share/xdg-desktop-portal" "/share/applications"];
     systemd.user.services.niri.enableDefaultPath = false;
   };
 
@@ -18,13 +19,15 @@
     config,
     ...
   }: {
+    xdg.portal.enable = true;
+
     home.file.".config/niri".source = config.lib.file.mkOutOfStoreSymlink ("/etc/nixos/aspects/desktop/niri/configs/" + host.hostName);
 
-    home.packages = with pkgs; [noctalia xwayland-satellite];
+    home.packages = with pkgs; [noctalia xwayland-satellite playerctl];
     home.file.".config/noctalia".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/niri/noctalia/";
   };
 
-  persist.home.directories = [".local/state/noctalia"];
+  persist.home.directories = [".local/state/noctalia" ".local/state/wireplumber"];
 
   provides.to-users.includes = [aspect-utils.self];
 }
