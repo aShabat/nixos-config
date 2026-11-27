@@ -1,5 +1,4 @@
-{aspect-utils, ...}: {
-  provides.to-users.includes = [aspect-utils.self];
+{...}: {
   homeManager = {pkgs, ...}: {
     programs = {
       firefox = {
