@@ -1,9 +1,4 @@
-{
-  den,
-  aspect-utils,
-  ...
-}: {
-  includes = with den.aspects; [unfree];
+{aspect-utils, ...}: {
   nixos = {
     programs.steam.enable = true;
   };

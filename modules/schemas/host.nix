@@ -7,6 +7,7 @@
       ssh.netbird
       nix
       close-lid
+      unfree
       boot
     ];
   };
