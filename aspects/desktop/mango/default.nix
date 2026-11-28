@@ -22,7 +22,8 @@
     host,
     ...
   }: {
-    home.packages = with pkgs; [noctalia];
+    home.packages = with pkgs; [noctalia playerctl wireplumber];
+
     home.file.".config/mango".source = config.lib.file.mkOutOfStoreSymlink ("/etc/nixos/aspects/desktop/mango/configs/" + host.hostName);
     home.file.".config/mango-common".source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/aspects/desktop/mango/configs/common";
   };
