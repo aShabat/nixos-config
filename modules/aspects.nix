@@ -1,4 +1,5 @@
 {lib, ...}: let
+  isSkip = path: lib.hasInfix "_" (lib.baseNameOf path);
   isNixFile = path: lib.hasSuffix ".nix" (lib.baseNameOf path);
   isDir = path: !(lib.hasInfix "." (lib.baseNameOf path));
 
@@ -6,7 +7,7 @@
     name = lib.removeSuffix ".nix" (lib.baseNameOf path);
     attrPath = accAttrPath ++ [name];
   in
-    if name == "default"
+    if name == "default" || isSkip path
     then null
     else if isNixFile path
     then {
