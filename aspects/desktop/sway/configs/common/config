@@ -1,0 +1,168 @@
+### Variables
+#
+# Your preferred terminal emulator
+set $term ghostty
+
+### Key bindings
+#
+# Basics:
+#
+    # Start a terminal
+    bindsym super+Return exec $term
+
+    # Kill focused window
+    bindsym Super+Shift+q kill
+
+    # Start your launcher
+    bindsym Super+d exec $menu
+
+    # Drag floating windows by holding down Super and left mouse button.
+    # Resize them with right mouse button + Super.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier Super normal
+
+    # Reload the configuration file
+    bindsym Super+Shift+c reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym Super+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    bindsym Super+Left focus left
+    bindsym Super+Down focus down
+    bindsym Super+Up focus up
+    bindsym Super+Right focus right
+
+    bindsym Super+Shift+Left move left
+    bindsym Super+Shift+Down move down
+    bindsym Super+Shift+Up move up
+    bindsym Super+Shift+Right move right
+#
+# Workspaces:
+#
+    # Switch to workspace
+    bindsym Super+1 workspace number 1
+    bindsym Super+2 workspace number 2
+    bindsym Super+3 workspace number 3
+    bindsym Super+4 workspace number 4
+    bindsym Super+5 workspace number 5
+    bindsym Super+6 workspace number 6
+    bindsym Super+7 workspace number 7
+    bindsym Super+8 workspace number 8
+    bindsym Super+9 workspace number 9
+    bindsym Super+0 workspace number 10
+    # Move focused container to workspace
+    bindsym Super+Shift+1 move container to workspace number 1
+    bindsym Super+Shift+2 move container to workspace number 2
+    bindsym Super+Shift+3 move container to workspace number 3
+    bindsym Super+Shift+4 move container to workspace number 4
+    bindsym Super+Shift+5 move container to workspace number 5
+    bindsym Super+Shift+6 move container to workspace number 6
+    bindsym Super+Shift+7 move container to workspace number 7
+    bindsym Super+Shift+8 move container to workspace number 8
+    bindsym Super+Shift+9 move container to workspace number 9
+    bindsym Super+Shift+0 move container to workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # Super+b or Super+v, for horizontal and vertical splits
+    # respectively.
+    bindsym Super+b splith
+    bindsym Super+v splitv
+
+    # Switch the current container between different layout styles
+    bindsym Super+s layout stacking
+    bindsym Super+w layout tabbed
+    bindsym Super+e layout toggle split
+
+    # Make the current focus fullscreen
+    bindsym Super+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    bindsym Super+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym Super+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym Super+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym Super+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym Super+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Super+r mode "resize"
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioLowerVolume exec wpctl set-volume @DEFAULT_SINK@ 5%-
+    bindsym --locked XF86AudioRaiseVolume exec wpctl set-volume @DEFAULT_SINK@ 5%+
+
+    # Special keys to control media via playerctl
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    bindsym --locked XF86AudioPause exec playerctl play-pause
+    bindsym --locked XF86AudioPrev exec playerctl previous
+    bindsym --locked XF86AudioNext exec playerctl next
+    bindsym --locked XF86AudioStop exec playerctl stop
+
+    # Special keys to adjust brightness via brightnessctl
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+
+    # Special key to take a screenshot with grim
+    bindsym Print exec grim
+
+#
+# Status Bar:
+#
+# Read `man 5 sway-bar` for more information about this section.
+bar {
+    position top
+
+    # When the status_command prints a new line to stdout, swaybar updates.
+    # The default just shows the current date and time.
+    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+include /etc/sway/config.d/*
+
+exec noctalia
+
+set $ipc noctalia msg
+
+bindsym Super+space exec $ipc panel-toggle launcher
+bindsym Super+s exec $ipc panel-toggle control-center
+bindsym Super+comma exec $ipc settings-toggle
