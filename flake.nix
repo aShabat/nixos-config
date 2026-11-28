@@ -24,6 +24,13 @@
     };
     impermanence.url = "github:nix-community/impermanence";
     import-tree.url = "github:denful/import-tree";
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs = {
+        flake-parts.follows = "flake-parts";
+        nixpkgs.follows = "nixpkgs";
+      };
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
