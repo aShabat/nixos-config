@@ -184,7 +184,7 @@ overlay_color = 0x14a57cff
 "super+r" = "reload_config"
 
 # exit
-"super+m" = "quit"
+"super+alt+ctrl+q" = "quit"
 "super+q" = "killclient,"
 
 # workspace overview
@@ -204,10 +204,10 @@ overlay_color = 0x14a57cff
 
 # switch window status
 "super+g" = "toggleglobal,"
-"super+backslash" = "togglefloating,"
+"super+f" = "togglefloating,"
 "super+a" = "togglemaximizescreen,"
-"super+f" = "togglefullscreen,"
-"super+shift+f" = "togglefakefullscreen,"
+"super+m" = "togglefullscreen,"
+"super+shift+m" = "togglefakefullscreen,"
 "super+i" = "minimized,"
 "super+o" = "toggleoverlay,"
 "super+shift+I" = "restore_minimized"
